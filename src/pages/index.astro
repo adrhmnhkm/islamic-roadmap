@@ -1,0 +1,239 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { changelog } from '../data/changelog';
+
+const topics = [
+  {
+    title: 'Al-Quran',
+    description: 'Kumpulan sumber belajar Al-Quran dan ilmu-ilmu terkait.',
+    icon: '📖',
+    slug: 'quran'
+  },
+  {
+    title: 'Aqidah',
+    description: 'Referensi terpercaya tentang dasar-dasar keyakinan Islam.',
+    icon: '☪️',
+    slug: 'aqeedah'
+  },
+  {
+    title: 'Fiqih',
+    description: 'Koleksi kitab-kitab fiqih dan hukum Islam.',
+    icon: '⚖️',
+    slug: 'fiqh'
+  },
+  {
+    title: 'Hadits',
+    description: 'Kumpulan hadits dan ilmu-ilmu hadits.',
+    icon: '📚',
+    slug: 'hadith'
+  },
+  {
+    title: 'Sirah',
+    description: 'Sejarah kehidupan dan perjuangan Nabi Muhammad ﷺ.',
+    icon: '🕌',
+    slug: 'seerah'
+  },
+  {
+    title: 'Bahasa Arab',
+    description: 'Sumber belajar bahasa Arab untuk memahami Al-Quran dan Hadits.',
+    icon: '✍️',
+    slug: 'arabic'
+  }
+];
+
+const guides = [
+  {
+    title: 'Panduan Memulai Belajar Al-Quran untuk Pemula',
+    url: 'https://muslim.or.id/57341-panduan-belajar-al-quran-untuk-pemula.html'
+  },
+  {
+    title: 'Cara Efektif Menghafal Al-Quran dengan Metode Modern',
+    url: 'https://bincangsyariah.com/kalam/metode-menghafal-al-quran-yang-efektif/'
+  },
+  {
+    title: 'Memahami Dasar-dasar Ilmu Tajwid',
+    url: 'https://muslim.or.id/46625-pengantar-ilmu-tajwid.html'
+  },
+  {
+    title: 'Tips Konsisten dalam Membaca Al-Quran Setiap Hari',
+    url: 'https://islam.nu.or.id/kajian/tips-istiqomah-membaca-al-quran-setiap-hari-287nV'
+  },
+  {
+    title: 'Mengenal Asbabun Nuzul: Sebab Turunnya Ayat Al-Quran',
+    url: 'https://islam.nu.or.id/kajian/mengenal-asbabun-nuzul-dan-urgensinya-dalam-memahami-al-quran-2Dfpt'
+  }
+];
+
+// Get only the latest 5 changelog entries for the homepage
+const latestChangelog = changelog.slice(0, 5);
+---
+
+<Layout title="Islamic Roadmap - Panduan Belajar Islam Terarah">
+  <main>
+    <section class="relative py-20 overflow-hidden">
+      <div class="absolute inset-0 bg-gradient-to-br from-emerald-100/50 via-teal-100/30 to-cyan-100/50"></div>
+      <div class="container mx-auto px-4 relative">
+        <div class="max-w-3xl mx-auto text-center">
+          <h1 class="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-emerald-700 to-teal-700 bg-clip-text text-transparent">
+            Islamic Roadmap
+          </h1>
+          <p class="text-xl text-gray-600 mb-12">
+            Ikuti alur pembelajaran yang terstruktur untuk memahami Islam secara komprehensif, dari tingkat dasar hingga lanjutan.
+          </p>
+          <a 
+            href="#topics" 
+            class="inline-flex items-center px-6 py-3 text-lg font-semibold text-white bg-gradient-to-r from-emerald-600 to-teal-600 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5"
+          >
+            Mulai Belajar
+            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="topics" class="py-20">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-4 bg-gradient-to-r from-emerald-700 to-teal-700 bg-clip-text text-transparent">
+          Topik Pembelajaran
+        </h2>
+        <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
+          Pilih topik yang ingin Anda pelajari dan mulai perjalanan pembelajaran Anda.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {topics.map(topic => (
+            <a 
+              href={`/topics/${topic.slug}`} 
+              class="group"
+            >
+              <div class="h-full p-6 rounded-2xl bg-white/60 backdrop-blur-sm border border-gray-100 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                <div class="text-4xl mb-4 transform group-hover:scale-110 transition-transform duration-300">
+                  {topic.icon}
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-2 group-hover:text-emerald-600 transition-colors">
+                  {topic.title}
+                </h3>
+                <p class="text-gray-600">{topic.description}</p>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20 bg-white/50">
+      <div class="container mx-auto px-4">
+        <div class="max-w-3xl mx-auto">
+          <div class="flex items-center gap-3 mb-8">
+            <span class="text-4xl">🚀</span>
+            <div>
+              <h2 class="text-3xl font-bold bg-gradient-to-r from-emerald-700 to-teal-700 bg-clip-text text-transparent">
+                Aktif Dikembangkan
+              </h2>
+              <p class="text-gray-600 mt-2">
+                Kami terus meningkatkan konten, menambah sumber belajar baru, dan mengembangkan fitur untuk pengalaman belajar yang lebih baik.
+              </p>
+            </div>
+          </div>
+
+          <div class="relative">
+            <div class="absolute left-4 top-0 h-full w-0.5 bg-gray-200"></div>
+            <div class="space-y-8">
+              {latestChangelog.map((item) => (
+                <div class="relative pl-10">
+                  <div class={`absolute left-2 top-2 w-4 h-4 rounded-full border-4 bg-white
+                    ${item.category === 'feature' ? 'border-emerald-500' :
+                      item.category === 'improvement' ? 'border-blue-500' :
+                      'border-amber-500'}`}
+                  ></div>
+                  <div class="text-sm text-gray-500 mb-1">{item.date}</div>
+                  <h3 class="text-lg font-semibold text-gray-800">{item.title}</h3>
+                  <p class="text-gray-600 mt-1">{item.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div class="mt-8 flex gap-4 justify-center">
+            <a 
+              href="/changelog"
+              class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 transition-colors"
+            >
+              Lihat Semua Perubahan
+            </a>
+            <a 
+              href="/subscribe"
+              class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-emerald-600 rounded-md hover:bg-emerald-700 transition-colors"
+            >
+              <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+              </svg>
+              Berlangganan Notifikasi
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="guides" class="py-20 bg-white/50">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-4 bg-gradient-to-r from-emerald-700 to-teal-700 bg-clip-text text-transparent">
+          Panduan Terbaru
+        </h2>
+        <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
+          Artikel dan panduan praktis untuk membantu perjalanan belajar Anda.
+        </p>
+        <div class="max-w-3xl mx-auto">
+          <div class="space-y-4">
+            {guides.map(guide => (
+              <a 
+                href={guide.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="block p-4 rounded-lg hover:bg-white transition-colors duration-300 group"
+              >
+                <div class="flex items-center justify-between">
+                  <h3 class="text-lg font-medium text-gray-800 group-hover:text-emerald-600 transition-colors">
+                    {guide.title}
+                  </h3>
+                  <svg 
+                    class="w-5 h-5 text-gray-400 group-hover:text-emerald-600 transition-colors"
+                    fill="none" 
+                    stroke="currentColor" 
+                    viewBox="0 0 24 24"
+                  >
+                    <path 
+                      stroke-linecap="round" 
+                      stroke-linejoin="round" 
+                      stroke-width="2" 
+                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                    />
+                  </svg>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="py-20 bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50">
+      <div class="container mx-auto px-4">
+        <div class="max-w-3xl mx-auto text-center">
+          <h2 class="text-3xl font-bold mb-6 bg-gradient-to-r from-emerald-700 to-teal-700 bg-clip-text text-transparent">
+            Tentang Peta Pembelajaran
+          </h2>
+          <div class="bg-white/60 backdrop-blur-sm rounded-2xl p-8 shadow-lg">
+            <p class="text-gray-600 mb-4">
+              Peta pembelajaran ini dirancang untuk memberikan panduan yang jelas dalam mempelajari Islam. Setiap topik disusun secara bertahap, mulai dari tingkat dasar hingga lanjutan.
+            </p>
+            <p class="text-gray-600">
+              Pilih topik yang ingin Anda pelajari, ikuti alurnya, dan manfaatkan sumber-sumber belajar yang telah kami kurasi dengan cermat.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
