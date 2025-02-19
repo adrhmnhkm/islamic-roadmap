@@ -694,22 +694,21 @@ export function getStaticPaths() {
   };
 
   return Object.keys(topics).map((topic) => {
-    return {
-      params: { topic },
-      props: { 
-        topicData: topics[topic],
-        roadmapData: topicRoadmaps[topic]
-      }
-    };
-  });
-}
+  return {
+    params: { topic },
+    props: { 
+      topicData: topics[topic as keyof typeof topics], 
+      roadmapData: topicRoadmaps[topic as keyof typeof topicRoadmaps]
+    }
+  };
+});
 
 const { topic } = Astro.params;
 const { topicData, roadmapData } = Astro.props;
 
 const allResources = [
-  ...topicData.resources.map(r => ({ ...r, type: 'Buku' })),
-  ...(topicData.additionalResources || []).map(r => ({ ...r, type: r.type === 'video' ? 'Video' : 'Artikel' }))
+  ...topicData.resources.map((r: { [key: string]: any }) => ({ ...r, type: 'Buku' })),
+  ...(topicData.additionalResources || []).map((r: { type?: string }) => ({ ...r, type: r.type === 'video' ? 'Video' : 'Artikel' }))
 ];
 ---
 
