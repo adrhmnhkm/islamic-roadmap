@@ -5,6 +5,7 @@ import AdditionalResources from '../../components/AdditionalResources.astro';
 import SearchAndFilter from '../../components/SearchAndFilter';
 import LearningRoadmap from '../../components/LearningRoadmap';
 
+// TOPIC ROADMAP
 export function getStaticPaths() {
   const topicRoadmaps = {
     quran: {
@@ -203,9 +204,336 @@ export function getStaticPaths() {
           target: 'quran-advanced'
         }
       ]
+    },
+    aqeedah: {
+      nodes: [
+        {
+          id: 'aqeedah-basic',
+          label: 'Dasar Aqidah',
+          description: 'Memahami dasar-dasar keyakinan dalam Islam',
+          level: 'basic',
+          resources: [
+            {
+              title: 'Pengenalan Rukun Iman',
+              type: 'video',
+              description: 'Penjelasan tentang 6 rukun iman dalam Islam',
+              url: 'https://example.com/rukun-iman',
+              subResources: [
+                {
+                  title: 'Iman Kepada Allah',
+                  type: 'article',
+                  description: 'Memahami makna iman kepada Allah',
+                  url: 'https://example.com/iman-allah'
+                }
+              ]
+            }
+          ]
+        },
+        {
+          id: 'aqeedah-intermediate',
+          label: 'Tauhid',
+          description: 'Memperdalam pemahaman tentang keesaan Allah',
+          level: 'intermediate',
+          resources: [
+            {
+              title: 'Pembagian Tauhid',
+              type: 'article',
+              description: 'Memahami pembagian tauhid dalam Islam',
+              url: 'https://example.com/pembagian-tauhid'
+            }
+          ]
+        },
+        {
+          id: 'aqeedah-advanced',
+          label: 'Studi Komparatif',
+          description: 'Mempelajari perbandingan aqidah',
+          level: 'advanced',
+          resources: [
+            {
+              title: 'Perbandingan Mazhab Aqidah',
+              type: 'book',
+              description: 'Studi komparatif berbagai mazhab aqidah dalam Islam',
+              url: 'https://example.com/comparative-aqeedah'
+            }
+          ]
+        }
+      ],
+      edges: [
+        {
+          source: 'aqeedah-basic',
+          target: 'aqeedah-intermediate'
+        },
+        {
+          source: 'aqeedah-intermediate',
+          target: 'aqeedah-advanced'
+        }
+      ]
+    },
+    fiqh: {
+      nodes: [
+        {
+          id: 'fiqh-basic',
+          label: 'Dasar Fiqih',
+          description: 'Memahami dasar-dasar hukum Islam',
+          level: 'basic',
+          resources: [
+            {
+              title: 'Pengenalan Thaharah',
+              type: 'video',
+              description: 'Belajar tentang bersuci dalam Islam',
+              url: 'https://example.com/thaharah',
+              subResources: [
+                {
+                  title: 'Wudhu',
+                  type: 'video',
+                  description: 'Tata cara wudhu yang benar',
+                  url: 'https://example.com/wudhu'
+                },
+                {
+                  title: 'Tayammum',
+                  type: 'article',
+                  description: 'Panduan bersuci dengan debu',
+                  url: 'https://example.com/tayammum'
+                }
+              ]
+            }
+          ]
+        },
+        {
+          id: 'fiqh-intermediate',
+          label: 'Fiqih Ibadah',
+          description: 'Mempelajari hukum-hukum ibadah',
+          level: 'intermediate',
+          resources: [
+            {
+              title: 'Fiqih Shalat',
+              type: 'video',
+              description: 'Panduan lengkap tentang shalat',
+              url: 'https://example.com/fiqh-shalat'
+            }
+          ]
+        },
+        {
+          id: 'fiqh-advanced',
+          label: 'Ushul Fiqih',
+          description: 'Mempelajari metodologi hukum Islam',
+          level: 'advanced',
+          resources: [
+            {
+              title: 'Qawaid Fiqhiyyah',
+              type: 'book',
+              description: 'Kaidah-kaidah dalam fiqih Islam',
+              url: 'https://example.com/qawaid-fiqh'
+            }
+          ]
+        }
+      ],
+      edges: [
+        {
+          source: 'fiqh-basic',
+          target: 'fiqh-intermediate'
+        },
+        {
+          source: 'fiqh-intermediate',
+          target: 'fiqh-advanced'
+        }
+      ]
+    },
+    hadith: {
+      nodes: [
+        {
+          id: 'hadith-basic',
+          label: 'Dasar Ilmu Hadits',
+          description: 'Pengenalan ilmu hadits dan klasifikasinya',
+          level: 'basic',
+          resources: [
+            {
+              title: 'Pengenalan Ilmu Hadits',
+              type: 'video',
+              description: 'Dasar-dasar ilmu hadits dan sejarahnya',
+              url: 'https://example.com/intro-hadith',
+              subResources: [
+                {
+                  title: 'Definisi Hadits',
+                  type: 'article',
+                  description: 'Memahami pengertian dan komponen hadits',
+                  url: 'https://example.com/hadith-definition'
+                }
+              ]
+            }
+          ]
+        },
+        {
+          id: 'hadith-intermediate',
+          label: 'Hadits Pilihan',
+          description: 'Mempelajari hadits-hadits pilihan',
+          level: 'intermediate',
+          resources: [
+            {
+              title: 'Arba\'in An-Nawawi',
+              type: 'book',
+              description: '40 Hadits Pilihan Imam Nawawi',
+              url: 'https://example.com/arbain-nawawi'
+            }
+          ]
+        },
+        {
+          id: 'hadith-advanced',
+          label: 'Ilmu Musthalah Hadits',
+          description: 'Mempelajari terminologi hadits',
+          level: 'advanced',
+          resources: [
+            {
+              title: 'Musthalah Hadits',
+              type: 'book',
+              description: 'Terminologi dalam ilmu hadits',
+              url: 'https://example.com/musthalah'
+            }
+          ]
+        }
+      ],
+      edges: [
+        {
+          source: 'hadith-basic',
+          target: 'hadith-intermediate'
+        },
+        {
+          source: 'hadith-intermediate',
+          target: 'hadith-advanced'
+        }
+      ]
+    },
+    seerah: {
+      nodes: [
+        {
+          id: 'seerah-basic',
+          label: 'Dasar Sirah',
+          description: 'Pengenalan sejarah hidup Nabi Muhammad ﷺ',
+          level: 'basic',
+          resources: [
+            {
+              title: 'Masa Kecil Rasulullah',
+              type: 'video',
+              description: 'Mempelajari masa kecil dan remaja Nabi Muhammad ﷺ',
+              url: 'https://example.com/early-life',
+              subResources: [
+                {
+                  title: 'Kelahiran Nabi',
+                  type: 'article',
+                  description: 'Kisah kelahiran Nabi Muhammad ﷺ',
+                  url: 'https://example.com/prophet-birth'
+                }
+              ]
+            }
+          ]
+        },
+        {
+          id: 'seerah-intermediate',
+          label: 'Periode Makkah & Madinah',
+          description: 'Mempelajari dakwah di Makkah dan Madinah',
+          level: 'intermediate',
+          resources: [
+            {
+              title: 'Dakwah di Makkah',
+              type: 'video',
+              description: 'Periode dakwah di Makkah',
+              url: 'https://example.com/makkan-period'
+            }
+          ]
+        },
+        {
+          id: 'seerah-advanced',
+          label: 'Analisis Sirah',
+          description: 'Analisis mendalam tentang sirah',
+          level: 'advanced',
+          resources: [
+            {
+              title: 'Fiqih Sirah',
+              type: 'book',
+              description: 'Pelajaran hukum dari sirah Nabi',
+              url: 'https://example.com/fiqh-seerah'
+            }
+          ]
+        }
+      ],
+      edges: [
+        {
+          source: 'seerah-basic',
+          target: 'seerah-intermediate'
+        },
+        {
+          source: 'seerah-intermediate',
+          target: 'seerah-advanced'
+        }
+      ]
+    },
+    arabic: {
+      nodes: [
+        {
+          id: 'arabic-basic',
+          label: 'Dasar Bahasa Arab',
+          description: 'Mempelajari dasar-dasar bahasa Arab',
+          level: 'basic',
+          resources: [
+            {
+              title: 'Huruf Arab',
+              type: 'video',
+              description: 'Belajar menulis dan membaca huruf Arab',
+              url: 'https://example.com/arabic-letters',
+              subResources: [
+                {
+                  title: 'Penulisan Huruf',
+                  type: 'video',
+                  description: 'Cara menulis huruf Arab dengan benar',
+                  url: 'https://example.com/writing-arabic'
+                }
+              ]
+            }
+          ]
+        },
+        {
+          id: 'arabic-intermediate',
+          label: 'Nahwu & Sharaf',
+          description: 'Mempelajari tata bahasa Arab',
+          level: 'intermediate',
+          resources: [
+            {
+              title: 'Dasar Nahwu',
+              type: 'video',
+              description: 'Pengenalan ilmu nahwu',
+              url: 'https://example.com/nahwu'
+            }
+          ]
+        },
+        {
+          id: 'arabic-advanced',
+          label: 'Balaghah',
+          description: 'Mempelajari sastra Arab',
+          level: 'advanced',
+          resources: [
+            {
+              title: 'Ilmu Balaghah',
+              type: 'book',
+              description: 'Dasar-dasar ilmu balaghah',
+              url: 'https://example.com/balaghah'
+            }
+          ]
+        }
+      ],
+      edges: [
+        {
+          source: 'arabic-basic',
+          target: 'arabic-intermediate'
+        },
+        {
+          source: 'arabic-intermediate',
+          target: 'arabic-advanced'
+        }
+      ]
     }
   };
 
+  // TOPIC
   const topics = {
     quran: {
       id: 'quran',
@@ -229,6 +557,136 @@ export function getStaticPaths() {
           description: "Seri video pembelajaran dasar-dasar Tajwid",
           language: "Indonesia",
           url: "https://www.youtube.com/watch?v=example1",
+          platform: "YouTube"
+        }
+      ]
+    },
+    aqeedah: {
+      id: 'aqeedah',
+      title: 'Aqidah',
+      description: 'Mempelajari dasar-dasar keyakinan dalam Islam.',
+      resources: [
+        {
+          title: "Kitab Tauhid",
+          author: "Syaikh Muhammad bin Abdul Wahhab",
+          description: "Penjelasan mendasar tentang tauhid dalam Islam",
+          level: "Pemula",
+          language: "Indonesia",
+          downloadUrl: "https://example.com/kitab-tauhid"
+        }
+      ],
+      additionalResources: [
+        {
+          title: "Pengantar Ilmu Tauhid",
+          author: "Ustadz Abdul Somad",
+          type: "video",
+          description: "Seri video pembelajaran dasar-dasar tauhid",
+          language: "Indonesia",
+          url: "https://example.com/tauhid-intro",
+          platform: "YouTube"
+        }
+      ]
+    },
+    fiqh: {
+      id: 'fiqh',
+      title: 'Fiqih',
+      description: 'Mempelajari hukum-hukum Islam dalam kehidupan sehari-hari.',
+      resources: [
+        {
+          title: "Fiqih Praktis",
+          author: "Dr. Yusuf Al-Qaradawi",
+          description: "Panduan praktis fiqih sehari-hari",
+          level: "Pemula",
+          language: "Indonesia",
+          downloadUrl: "https://example.com/fiqh-praktis"
+        }
+      ],
+      additionalResources: [
+        {
+          title: "Belajar Fiqih Ibadah",
+          author: "Ustadz Adi Hidayat",
+          type: "video",
+          description: "Seri pembelajaran fiqih ibadah sehari-hari",
+          language: "Indonesia",
+          url: "https://example.com/fiqh-ibadah",
+          platform: "YouTube"
+        }
+      ]
+    },
+    hadith: {
+      id: 'hadith',
+      title: 'Hadits',
+      description: 'Mempelajari hadits dan ilmu-ilmu hadits.',
+      resources: [
+        {
+          title: "Riyadhus Shalihin",
+          author: "Imam An-Nawawi",
+          description: "Kumpulan hadits pilihan tentang akhlak",
+          level: "Pemula",
+          language: "Indonesia",
+          downloadUrl: "https://example.com/riyadhus-shalihin"
+        }
+      ],
+      additionalResources: [
+        {
+          title: "Pengantar Ilmu Hadits",
+          author: "Ustadz Felix Siauw",
+          type: "video",
+          description: "Dasar-dasar ilmu hadits",
+          language: "Indonesia",
+          url: "https://example.com/hadith-intro",
+          platform: "YouTube"
+        }
+      ]
+    },
+    seerah: {
+      id: 'seerah',
+      title: 'Sirah',
+      description: 'Mempelajari sejarah kehidupan Nabi Muhammad ﷺ.',
+      resources: [
+        {
+          title: "Sirah Nabawiyah",
+          author: "Syaikh Shafiyyurrahman Al-Mubarakfuri",
+          description: "Sejarah lengkap kehidupan Nabi Muhammad ﷺ",
+          level: "Pemula",
+          language: "Indonesia",
+          downloadUrl: "https://example.com/sirah-nabawiyah"
+        }
+      ],
+      additionalResources: [
+        {
+          title: "Kisah Nabi Muhammad ﷺ",
+          author: "Ustadz Khalid Basalamah",
+          type: "video",
+          description: "Seri video tentang kehidupan Nabi Muhammad ﷺ",
+          language: "Indonesia",
+          url: "https://example.com/prophet-story",
+          platform: "YouTube"
+        }
+      ]
+    },
+    arabic: {
+      id: 'arabic',
+      title: 'Bahasa Arab',
+      description: 'Mempelajari bahasa Arab untuk memahami Al-Quran dan Hadits.',
+      resources: [
+        {
+          title: "Durusul Lughah",
+          author: "Dr. V. Abdur Rahim",
+          description: "Buku pembelajaran bahasa Arab modern",
+          level: "Pemula",
+          language: "Indonesia",
+          downloadUrl: "https://example.com/durusul-lughah"
+        }
+      ],
+      additionalResources: [
+        {
+          title: "Belajar Bahasa Arab",
+          author: "Ustadz Erwandi Tarmizi",
+          type: "video",
+          description: "Seri pembelajaran bahasa Arab untuk pemula",
+          language: "Indonesia",
+          url: "https://example.com/learn-arabic",
           platform: "YouTube"
         }
       ]
