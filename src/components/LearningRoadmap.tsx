@@ -58,7 +58,7 @@ const LearningRoadmap: React.FC<LearningRoadmapProps> = ({ nodes }) => {
 
   return (
     <div className="w-full">
-      <div className="grid grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
         {/* Basic Level */}
         <div className="space-y-4">
           <div className="text-center mb-6">
@@ -66,25 +66,27 @@ const LearningRoadmap: React.FC<LearningRoadmapProps> = ({ nodes }) => {
               Dasar
             </span>
           </div>
-          {basicNodes.map((node) => (
-            <div
-              key={node.id}
-              onClick={() => setSelectedNode(node)}
-              className="relative bg-white p-4 rounded-lg cursor-pointer transition-all duration-300
-                border border-emerald-200 hover:shadow-md hover:-translate-y-1"
-            >
-              <div className="flex flex-col gap-2">
-                <h3 className="font-medium text-gray-800">{node.label}</h3>
-                <p className="text-xs text-gray-500">{node.description}</p>
-                <div className="flex items-center gap-1 text-xs text-gray-400 mt-1">
-                  <span>{node.resources.length} sumber</span>
+          <div className="space-y-4">
+            {basicNodes.map((node) => (
+              <div
+                key={node.id}
+                onClick={() => setSelectedNode(node)}
+                className="relative bg-white p-4 rounded-lg cursor-pointer transition-all duration-300
+                  border border-emerald-200 hover:shadow-md hover:-translate-y-1"
+              >
+                <div className="flex flex-col gap-2">
+                  <h3 className="font-medium text-gray-800">{node.label}</h3>
+                  <p className="text-xs text-gray-500">{node.description}</p>
+                  <div className="flex items-center gap-1 text-xs text-gray-400 mt-1">
+                    <span>{node.resources.length} sumber</span>
+                  </div>
+                  {node.completed && (
+                    <span className="absolute top-2 right-2 text-emerald-500">✓</span>
+                  )}
                 </div>
-                {node.completed && (
-                  <span className="absolute top-2 right-2 text-emerald-500">✓</span>
-                )}
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
 
         {/* Intermediate Level */}
@@ -94,25 +96,27 @@ const LearningRoadmap: React.FC<LearningRoadmapProps> = ({ nodes }) => {
               Menengah
             </span>
           </div>
-          {intermediateNodes.map((node) => (
-            <div
-              key={node.id}
-              onClick={() => setSelectedNode(node)}
-              className="relative bg-white p-4 rounded-lg cursor-pointer transition-all duration-300
-                border border-blue-200 hover:shadow-md hover:-translate-y-1"
-            >
-              <div className="flex flex-col gap-2">
-                <h3 className="font-medium text-gray-800">{node.label}</h3>
-                <p className="text-xs text-gray-500">{node.description}</p>
-                <div className="flex items-center gap-1 text-xs text-gray-400 mt-1">
-                  <span>{node.resources.length} sumber</span>
+          <div className="space-y-4">
+            {intermediateNodes.map((node) => (
+              <div
+                key={node.id}
+                onClick={() => setSelectedNode(node)}
+                className="relative bg-white p-4 rounded-lg cursor-pointer transition-all duration-300
+                  border border-blue-200 hover:shadow-md hover:-translate-y-1"
+              >
+                <div className="flex flex-col gap-2">
+                  <h3 className="font-medium text-gray-800">{node.label}</h3>
+                  <p className="text-xs text-gray-500">{node.description}</p>
+                  <div className="flex items-center gap-1 text-xs text-gray-400 mt-1">
+                    <span>{node.resources.length} sumber</span>
+                  </div>
+                  {node.completed && (
+                    <span className="absolute top-2 right-2 text-emerald-500">✓</span>
+                  )}
                 </div>
-                {node.completed && (
-                  <span className="absolute top-2 right-2 text-emerald-500">✓</span>
-                )}
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
 
         {/* Advanced Level */}
@@ -122,25 +126,27 @@ const LearningRoadmap: React.FC<LearningRoadmapProps> = ({ nodes }) => {
               Lanjutan
             </span>
           </div>
-          {advancedNodes.map((node) => (
-            <div
-              key={node.id}
-              onClick={() => setSelectedNode(node)}
-              className="relative bg-white p-4 rounded-lg cursor-pointer transition-all duration-300
-                border border-purple-200 hover:shadow-md hover:-translate-y-1"
-            >
-              <div className="flex flex-col gap-2">
-                <h3 className="font-medium text-gray-800">{node.label}</h3>
-                <p className="text-xs text-gray-500">{node.description}</p>
-                <div className="flex items-center gap-1 text-xs text-gray-400 mt-1">
-                  <span>{node.resources.length} sumber</span>
+          <div className="space-y-4">
+            {advancedNodes.map((node) => (
+              <div
+                key={node.id}
+                onClick={() => setSelectedNode(node)}
+                className="relative bg-white p-4 rounded-lg cursor-pointer transition-all duration-300
+                  border border-purple-200 hover:shadow-md hover:-translate-y-1"
+              >
+                <div className="flex flex-col gap-2">
+                  <h3 className="font-medium text-gray-800">{node.label}</h3>
+                  <p className="text-xs text-gray-500">{node.description}</p>
+                  <div className="flex items-center gap-1 text-xs text-gray-400 mt-1">
+                    <span>{node.resources.length} sumber</span>
+                  </div>
+                  {node.completed && (
+                    <span className="absolute top-2 right-2 text-emerald-500">✓</span>
+                  )}
                 </div>
-                {node.completed && (
-                  <span className="absolute top-2 right-2 text-emerald-500">✓</span>
-                )}
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
 

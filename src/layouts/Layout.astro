@@ -79,7 +79,42 @@ const {
           <a href="/" class="flex items-center">
             <img src="/logo.svg" alt="Islamic Roadmap" class="h-8" />
           </a>
-          <div class="space-x-6">
+
+          {/* Desktop Menu */}
+          <div class="hidden md:flex space-x-6">
+            <a href="/" class="text-gray-600 hover:text-emerald-600 transition-colors font-medium">Beranda</a>
+            <a href="#topics" class="text-gray-600 hover:text-emerald-600 transition-colors font-medium">Topik</a>
+            <a href="#about" class="text-gray-600 hover:text-emerald-600 transition-colors font-medium">Tentang</a>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <button 
+            id="mobile-menu-button"
+            class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
+            aria-label="Menu"
+          >
+            <svg 
+              class="w-6 h-6 text-gray-600" 
+              fill="none" 
+              stroke="currentColor" 
+              viewBox="0 0 24 24"
+            >
+              <path 
+                stroke-linecap="round" 
+                stroke-linejoin="round" 
+                stroke-width="2" 
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            </svg>
+          </button>
+        </div>
+
+        {/* Mobile Menu */}
+        <div 
+          id="mobile-menu"
+          class="hidden md:hidden mt-4 py-4 border-t border-gray-100"
+        >
+          <div class="flex flex-col space-y-4">
             <a href="/" class="text-gray-600 hover:text-emerald-600 transition-colors font-medium">Beranda</a>
             <a href="#topics" class="text-gray-600 hover:text-emerald-600 transition-colors font-medium">Topik</a>
             <a href="#about" class="text-gray-600 hover:text-emerald-600 transition-colors font-medium">Tentang</a>
@@ -98,12 +133,12 @@ const {
           <img src="/logo.svg" alt="Islamic Roadmap" class="h-8" />
           <span class="text-sm text-gray-500">by</span>
           <a 
-            href="https://twitter.com/muktafiatsar" 
+            href="https://twitter.com/adrhmnhkm" 
             target="_blank" 
             rel="noopener noreferrer"
             class="text-blue-400 hover:text-blue-300 transition-colors font-medium"
           >
-            @muktafiatsar
+            @adrhmnhkm
           </a>
         </div>
 
@@ -177,6 +212,79 @@ const {
         </div>
       </div>
     </footer>
+
+    <script>
+      const mobileMenuButton = document.getElementById('mobile-menu-button');
+      const mobileMenu = document.getElementById('mobile-menu');
+
+      if (mobileMenuButton && mobileMenu) {
+        mobileMenuButton.addEventListener('click', () => {
+          mobileMenu.classList.toggle('hidden');
+          
+          // Change menu icon
+          const svg = mobileMenuButton.querySelector('svg');
+          if (svg) {
+            if (mobileMenu.classList.contains('hidden')) {
+              svg.innerHTML = `
+                <path 
+                  stroke-linecap="round" 
+                  stroke-linejoin="round" 
+                  stroke-width="2" 
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              `;
+            } else {
+              svg.innerHTML = `
+                <path 
+                  stroke-linecap="round" 
+                  stroke-linejoin="round" 
+                  stroke-width="2" 
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              `;
+            }
+          }
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (event) => {
+          if (!mobileMenuButton.contains(event.target as Node) && 
+              !mobileMenu.contains(event.target as Node)) {
+            mobileMenu.classList.add('hidden');
+            const svg = mobileMenuButton.querySelector('svg');
+            if (svg) {
+              svg.innerHTML = `
+                <path 
+                  stroke-linecap="round" 
+                  stroke-linejoin="round" 
+                  stroke-width="2" 
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              `;
+            }
+          }
+        });
+
+        // Close mobile menu when clicking on a link
+        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+        mobileMenuLinks.forEach(link => {
+          link.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+            const svg = mobileMenuButton.querySelector('svg');
+            if (svg) {
+              svg.innerHTML = `
+                <path 
+                  stroke-linecap="round" 
+                  stroke-linejoin="round" 
+                  stroke-width="2" 
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              `;
+            }
+          });
+        });
+      }
+    </script>
   </body>
 </html>
 
