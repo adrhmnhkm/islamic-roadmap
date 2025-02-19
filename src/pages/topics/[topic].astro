@@ -530,7 +530,204 @@ export function getStaticPaths() {
           target: 'arabic-advanced'
         }
       ]
-    }
+    },
+    mualaf: {
+      nodes: [
+        {
+          id: 'quran-basic',
+          label: 'Dasar Al-Quran',
+          description: 'Belajar membaca Al-Quran dan tajwid dasar',
+          level: 'basic',
+          position: { x: 50, y: 250 },
+          resources: [
+            {
+              title: 'Pengenalan Huruf Hijaiyah',
+              type: 'video',
+              description: 'Video pembelajaran mengenal huruf hijaiyah dan cara membacanya',
+              url: 'https://www.youtube.com/watch?v=UpYx7F14oxo',
+              subResources: [
+                {
+                  title: 'Bentuk Huruf Hijaiyah',
+                  type: 'article',
+                  description: 'Penjelasan detail tentang bentuk-bentuk huruf hijaiyah',
+                  url: 'https://example.com/hijaiyah-forms'
+                },
+                {
+                  title: 'Latihan Pengucapan',
+                  type: 'video',
+                  description: 'Praktik pengucapan huruf hijaiyah dengan benar',
+                  url: 'https://example.com/hijaiyah-pronunciation'
+                },
+                {
+                  title: 'Menulis Huruf Hijaiyah',
+                  type: 'video',
+                  description: 'Tutorial cara menulis huruf hijaiyah dengan benar',
+                  url: 'https://example.com/hijaiyah-writing'
+                }
+              ]
+            },
+            {
+              title: 'Dasar-dasar Ilmu Tajwid',
+              type: 'book',
+              description: 'Buku panduan lengkap belajar tajwid untuk pemula',
+              url: 'https://example.com/tajwid-book',
+              subResources: [
+                {
+                  title: 'Hukum Nun Sukun dan Tanwin',
+                  type: 'video',
+                  description: 'Penjelasan tentang hukum nun sukun dan tanwin',
+                  url: 'https://example.com/nun-sukun'
+                },
+                {
+                  title: 'Hukum Mim Sukun',
+                  type: 'article',
+                  description: 'Pembahasan tentang hukum mim sukun',
+                  url: 'https://example.com/mim-sukun'
+                },
+                {
+                  title: 'Mad (Panjang Pendek)',
+                  type: 'video',
+                  description: 'Penjelasan tentang hukum mad dalam Al-Quran',
+                  url: 'https://example.com/mad-rules'
+                }
+              ]
+            }
+          ]
+        },
+        {
+          id: 'quran-intermediate',
+          label: 'Menghafal Al-Quran',
+          description: 'Teknik menghafal dan memahami makna',
+          level: 'intermediate',
+          position: { x: 400, y: 250 },
+          resources: [
+            {
+              title: 'Metode Menghafal Al-Quran',
+              type: 'video',
+              description: 'Tutorial lengkap teknik menghafal Al-Quran yang efektif',
+              url: 'https://example.com/tahfidz-method',
+              subResources: [
+                {
+                  title: 'Metode Talaqqi',
+                  type: 'video',
+                  description: 'Penjelasan dan praktik metode talaqqi dalam menghafal',
+                  url: 'https://example.com/talaqqi-method'
+                },
+                {
+                  title: 'Teknik Visualisasi',
+                  type: 'article',
+                  description: 'Cara menggunakan visualisasi untuk memperkuat hafalan',
+                  url: 'https://example.com/visualization-technique'
+                },
+                {
+                  title: 'Metode Pengulangan',
+                  type: 'video',
+                  description: 'Strategi pengulangan efektif dalam menghafal',
+                  url: 'https://example.com/repetition-method'
+                }
+              ]
+            },
+            {
+              title: 'Memahami Arti Ayat',
+              type: 'article',
+              description: 'Panduan memahami makna ayat untuk memperkuat hafalan',
+              url: 'https://example.com/understanding-verses',
+              subResources: [
+                {
+                  title: 'Dasar Bahasa Arab Al-Quran',
+                  type: 'video',
+                  description: 'Pengenalan dasar bahasa Arab untuk memahami Al-Quran',
+                  url: 'https://example.com/quranic-arabic'
+                },
+                {
+                  title: 'Kosakata Al-Quran',
+                  type: 'book',
+                  description: 'Kumpulan kosakata yang sering muncul dalam Al-Quran',
+                  url: 'https://example.com/quran-vocabulary'
+                },
+                {
+                  title: 'Analisis Ayat',
+                  type: 'article',
+                  description: 'Cara menganalisis dan memahami struktur ayat',
+                  url: 'https://example.com/verse-analysis'
+                }
+              ]
+            }
+          ]
+        },
+        {
+          id: 'quran-advanced',
+          label: 'Tafsir Al-Quran',
+          description: 'Mempelajari tafsir dan ilmu-ilmu Al-Quran',
+          level: 'advanced',
+          position: { x: 750, y: 250 },
+          resources: [
+            {
+              title: 'Metodologi Tafsir',
+              type: 'article',
+              description: 'Artikel mendalam tentang metodologi penafsiran Al-Quran',
+              url: 'https://example.com/tafsir-methodology',
+              subResources: [
+                {
+                  title: 'Tafsir bil Ma\'tsur',
+                  type: 'video',
+                  description: 'Penjelasan tentang metode tafsir dengan riwayat',
+                  url: 'https://example.com/tafsir-bil-matsur'
+                },
+                {
+                  title: 'Tafsir bil Ra\'yi',
+                  type: 'article',
+                  description: 'Pembahasan tentang metode tafsir dengan akal',
+                  url: 'https://example.com/tafsir-bil-rayi'
+                },
+                {
+                  title: 'Tafsir Maudhu\'i',
+                  type: 'video',
+                  description: 'Metode tafsir tematik dalam Al-Quran',
+                  url: 'https://example.com/tafsir-maudhui'
+                }
+              ]
+            },
+            {
+              title: 'Ulumul Quran',
+              type: 'video',
+              description: 'Seri pembelajaran ilmu-ilmu Al-Quran',
+              url: 'https://example.com/ulumul-quran',
+              subResources: [
+                {
+                  title: 'Asbabun Nuzul',
+                  type: 'book',
+                  description: 'Studi tentang sebab-sebab turunnya ayat',
+                  url: 'https://example.com/asbabun-nuzul'
+                },
+                {
+                  title: 'Nasikh Mansukh',
+                  type: 'article',
+                  description: 'Pembahasan tentang ayat-ayat yang menghapus dan dihapus',
+                  url: 'https://example.com/nasikh-mansukh'
+                },
+                {
+                  title: 'I\'jazul Quran',
+                  type: 'video',
+                  description: 'Kemukjizatan Al-Quran dari berbagai aspek',
+                  url: 'https://example.com/ijazul-quran'
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      edges: [
+        {
+          source: 'quran-basic',
+          target: 'quran-intermediate'
+        },
+        {
+          source: 'quran-intermediate',
+          target: 'quran-advanced'
+        }
+      ]
+    },
   };
 
   // TOPIC
@@ -690,25 +887,52 @@ export function getStaticPaths() {
           platform: "YouTube"
         }
       ]
-    }
+    },
+    mualaf: {
+      id: 'quran',
+      title: 'Al-Quran',
+      description: 'Kumpulan sumber belajar Al-Quran dan ilmu-ilmu terkait.',
+      resources: [
+        {
+          title: "Mudah Belajar Tajwid",
+          author: "Dr. Syed Kalimullah Qadri",
+          description: "Panduan lengkap belajar Tajwid dengan contoh praktis.",
+          level: "Pemula",
+          language: "Indonesia",
+          downloadUrl: "https://waqfeya.net/book.php?bid=2538"
+        }
+      ],
+      additionalResources: [
+        {
+          title: "Pengantar Ilmu Tajwid",
+          author: "Ustadz Nouman Ali Khan",
+          type: "video",
+          description: "Seri video pembelajaran dasar-dasar Tajwid",
+          language: "Indonesia",
+          url: "https://www.youtube.com/watch?v=example1",
+          platform: "YouTube"
+        }
+      ]
+    },
   };
 
   return Object.keys(topics).map((topic) => {
-  return {
-    params: { topic },
-    props: { 
-      topicData: topics[topic as keyof typeof topics], 
-      roadmapData: topicRoadmaps[topic as keyof typeof topicRoadmaps]
-    }
-  };
-});
+    return {
+      params: { topic },
+      props: { 
+        topicData: topics[topic],
+        roadmapData: topicRoadmaps[topic]
+      }
+    };
+  });
+}
 
 const { topic } = Astro.params;
 const { topicData, roadmapData } = Astro.props;
 
 const allResources = [
-  ...topicData.resources.map((r: { [key: string]: any }) => ({ ...r, type: 'Buku' })),
-  ...(topicData.additionalResources || []).map((r: { type?: string }) => ({ ...r, type: r.type === 'video' ? 'Video' : 'Artikel' }))
+  ...topicData.resources.map(r => ({ ...r, type: 'Buku' })),
+  ...(topicData.additionalResources || []).map(r => ({ ...r, type: r.type === 'video' ? 'Video' : 'Artikel' }))
 ];
 ---
 
