@@ -50,11 +50,13 @@ const topics = [
 const guides = [
   {
     title: 'Melepaskan Pikiran Muslim dari Hegemoni Sekuler',
-    url: 'https://yaqeeninstitute.org/read/paper/breaking-free-unshackling-the-muslim-mind-from-secular-thought-and-reestablishing-the-islamic-personality'
+    url: 'https://yaqeeninstitute.org/read/paper/breaking-free-unshackling-the-muslim-mind-from-secular-thought-and-reestablishing-the-islamic-personality',
+    language: 'English'
   },
   {
     title: 'Cara Efektif Menghafal Al-Quran dengan Metode Modern',
-    url: 'https://bincangsyariah.com/kalam/metode-menghafal-al-quran-yang-efektif/'
+    url: 'https://bincangsyariah.com/kalam/metode-menghafal-al-quran-yang-efektif/',
+    language: 'Indonesia'
   },
   {
     title: 'Memahami Dasar-dasar Ilmu Tajwid',
@@ -200,11 +202,20 @@ const latestChangelog = changelog.slice(0, 5);
                 class="block p-4 rounded-lg hover:bg-white transition-colors duration-300 group"
               >
                 <div class="flex items-center justify-between">
-                  <h3 class="text-lg font-medium text-gray-800 group-hover:text-emerald-600 transition-colors">
-                    {guide.title}
-                  </h3>
+                  <div class="flex-1">
+                    <h3 class="text-lg font-medium text-gray-800 group-hover:text-emerald-600 transition-colors">
+                      {guide.title}
+                    </h3>
+                    <span class={`inline-block mt-2 px-2 py-1 text-xs font-medium rounded-full ${
+                      guide.language === 'Indonesia' 
+                        ? 'bg-emerald-100 text-emerald-800' 
+                        : 'bg-violet-100 text-violet-800'
+                    }`}>
+                      {guide.language}
+                    </span>
+                  </div>
                   <svg 
-                    class="w-5 h-5 text-gray-400 group-hover:text-emerald-600 transition-colors"
+                    class="w-5 h-5 text-gray-400 group-hover:text-emerald-600 transition-colors flex-shrink-0 ml-4"
                     fill="none" 
                     stroke="currentColor" 
                     viewBox="0 0 24 24"
