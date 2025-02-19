@@ -12,13 +12,6 @@ Selamat datang di **Islamic Roadmap**, sebuah platform yang dirancang untuk memb
 - 📂 **Kategori Ilmu**: Fikih, Aqidah, Tafsir, Hadis, dan lainnya.
 - 🎯 **Interaktif & Terarah**: Materi tersusun berdasarkan kebutuhan pembelajaran.
 
-## 🛠 Teknologi yang Digunakan
-
-- **Backend**: Golang (Gin Framework)
-- **Database**: PostgreSQL
-- **Frontend**: (akan ditentukan)
-- **Deployment**: Docker & VPS
-
 ## 🎯 Kontribusi
 
 Kami membuka kesempatan bagi siapa saja yang ingin berkontribusi dalam proyek ini. Silakan buat **pull request** atau ajukan **issue** untuk berdiskusi lebih lanjut.
