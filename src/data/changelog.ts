@@ -8,6 +8,13 @@ export interface ChangelogEntry {
 
 export const changelog: ChangelogEntry[] = [
   {
+    date: '23 Feb, 2025',
+    title: 'Penyesuaian UI',
+    description: 'menampilkan jumlah sumber belajar yang ada',
+    category: 'feature',
+    version: '1.2.1'
+  },
+  {
     date: '19 Feb, 2025',
     title: 'Melengkapi materi dari setiap topik',
     description: 'penambahan dummy materi untuk setiap topik',
