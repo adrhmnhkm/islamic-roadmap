@@ -399,7 +399,7 @@ export const topicData: Record<string, TopicData> = {
       {
         id: 'sirah-basic',
         label: 'Dasar Sirah',
-        description: 'Pengenalan sejarah Nabi Muhammad SAW',
+        description: 'Pengenalan sejarah hebat Nabi Muhammad SAW',
         level: 'basic',
         resources: [
           {
