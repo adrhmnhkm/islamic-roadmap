@@ -1,57 +1,30 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import TopicCard from '../components/TopicCard.astro';
 import { changelog } from '../data/changelog';
+import { topicData, calculateResourceCount } from '../data/topics';
 
-const topics = [
-  {
-    title: 'Al-Quran',
-    description: 'Kumpulan sumber belajar Al-Quran dan ilmu-ilmu terkait.',
-    icon: '📖',
-    slug: 'quran'
-  },
-  {
-    title: 'Aqidah',
-    description: 'Referensi terpercaya tentang dasar-dasar keyakinan Islam.',
-    icon: '☪️',
-    slug: 'aqeedah'
-  },
-  {
-    title: 'Fiqih',
-    description: 'Koleksi kitab-kitab fiqih dan hukum Islam.',
-    icon: '⚖️',
-    slug: 'fiqh'
-  },
-  {
-    title: 'Hadits',
-    description: 'Kumpulan hadits dan ilmu-ilmu hadits.',
-    icon: '📚',
-    slug: 'hadith'
-  },
-  {
-    title: 'Sirah',
-    description: 'Sejarah kehidupan dan perjuangan Nabi Muhammad ﷺ.',
-    icon: '🕌',
-    slug: 'seerah'
-  },
-  {
-    title: 'Bahasa Arab',
-    description: 'Sumber belajar bahasa Arab untuk memahami Al-Quran dan Hadits.',
-    icon: '✍️',
-    slug: 'arabic'
-  },
-  {
-    title: 'Bekal Mualaf',
-    description: 'Yang harus dimiliki seseorang setelah masuk islam.',
-    icon: '🎒',
-    slug: 'mualaf'
-  }
-];
+// Transform topic data and calculate resource counts
+const topics = Object.entries(topicData).map(([slug, data]) => {
+  const resourceCount = calculateResourceCount(slug);
+  return {
+    title: data.title,
+    description: data.description,
+    icon: data.icon || '📚',
+    slug,
+    resourceCount: resourceCount ? {
+      videos: resourceCount.videos,
+      articles: resourceCount.articles,
+      books: resourceCount.books
+    } : null
+  };
+});
 
 const guides = [
   {
-    title: 'Melepaskan Pikiran Muslim dari Hegemoni Sekuler',
-    url: 'https://yaqeeninstitute.org/read/paper/breaking-free-unshackling-the-muslim-mind-from-secular-thought-and-reestablishing-the-islamic-personality',
-    language: 'English'
+    title: 'Panduan Memulai Belajar Al-Quran untuk Pemula',
+    url: 'https://muslim.or.id/57341-panduan-belajar-al-quran-untuk-pemula.html',
+    language: 'Indonesia'
   },
   {
     title: 'Cara Efektif Menghafal Al-Quran dengan Metode Modern',
@@ -60,15 +33,23 @@ const guides = [
   },
   {
     title: 'Memahami Dasar-dasar Ilmu Tajwid',
-    url: 'https://muslim.or.id/46625-pengantar-ilmu-tajwid.html'
+    url: 'https://muslim.or.id/46625-pengantar-ilmu-tajwid.html',
+    language: 'Indonesia'
+  },
+  {
+    title: "Beginner's Guide to Learning Quran",
+    url: 'https://example.com/beginners-guide-quran',
+    language: 'English'
   },
   {
     title: 'Tips Konsisten dalam Membaca Al-Quran Setiap Hari',
-    url: 'https://islam.nu.or.id/kajian/tips-istiqomah-membaca-al-quran-setiap-hari-287nV'
+    url: 'https://islam.nu.or.id/kajian/tips-istiqomah-membaca-al-quran-setiap-hari-287nV',
+    language: 'Indonesia'
   },
   {
-    title: 'Mengenal Asbabun Nuzul: Sebab Turunnya Ayat Al-Quran',
-    url: 'https://islam.nu.or.id/kajian/mengenal-asbabun-nuzul-dan-urgensinya-dalam-memahami-al-quran-2Dfpt'
+    title: 'Understanding Asbabun Nuzul: Context of Quranic Revelation',
+    url: 'https://example.com/understanding-asbabun-nuzul',
+    language: 'English'
   }
 ];
 
@@ -111,20 +92,7 @@ const latestChangelog = changelog.slice(0, 5);
         </p>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {topics.map(topic => (
-            <a 
-              href={`/topics/${topic.slug}`} 
-              class="group"
-            >
-              <div class="h-full p-6 rounded-2xl bg-white/60 backdrop-blur-sm border border-gray-100 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-                <div class="text-4xl mb-4 transform group-hover:scale-110 transition-transform duration-300">
-                  {topic.icon}
-                </div>
-                <h3 class="text-xl font-bold text-gray-800 mb-2 group-hover:text-emerald-600 transition-colors">
-                  {topic.title}
-                </h3>
-                <p class="text-gray-600">{topic.description}</p>
-              </div>
-            </a>
+            <TopicCard {...topic} />
           ))}
         </div>
       </div>
@@ -239,11 +207,11 @@ const latestChangelog = changelog.slice(0, 5);
       <div class="container mx-auto px-4">
         <div class="max-w-3xl mx-auto text-center">
           <h2 class="text-3xl font-bold mb-6 bg-gradient-to-r from-emerald-700 to-teal-700 bg-clip-text text-transparent">
-            Tentang Islamic Roadmap
+            Tentang Peta Pembelajaran
           </h2>
           <div class="bg-white/60 backdrop-blur-sm rounded-2xl p-8 shadow-lg">
             <p class="text-gray-600 mb-4">
-              Roadmap ini dirancang untuk memberikan panduan yang jelas dalam mempelajari Islam. Setiap topik disusun secara bertahap, mulai dari tingkat dasar hingga lanjutan.
+              Peta pembelajaran ini dirancang untuk memberikan panduan yang jelas dalam mempelajari Islam. Setiap topik disusun secara bertahap, mulai dari tingkat dasar hingga lanjutan.
             </p>
             <p class="text-gray-600">
               Pilih topik yang ingin Anda pelajari, ikuti alurnya, dan manfaatkan sumber-sumber belajar yang telah kami kurasi dengan cermat.

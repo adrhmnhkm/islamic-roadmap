@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import ShareProgress from './ShareProgress';
 
 interface Topic {
   id: string;
@@ -48,6 +49,13 @@ const ProgressTracker: React.FC<{ topic: Topic }> = ({ topic }) => {
           of {topic.totalLessons} lessons completed
         </span>
       </div>
+
+      {/* Add ShareProgress component */}
+      <ShareProgress 
+        topicId={topic.id}
+        topicTitle={topic.title}
+        progress={progress}
+      />
     </div>
   );
 };
