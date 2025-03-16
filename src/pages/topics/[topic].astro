@@ -35,6 +35,14 @@ const allResources = [
 
 <Layout title={`${currentTopic.title} - Islamic Roadmap`}>
   <main class="container mx-auto px-4 py-8">
+    <nav aria-label="Breadcrumb">
+      <ol class="flex">
+        <li><a href="/">Beranda</a></li>
+        <li><span class="mx-2">/</span></li>
+        <li>{currentTopic.title}</li>
+      </ol>
+    </nav>
+    
     <div class="max-w-4xl mx-auto">
       <h1 class="text-4xl font-bold text-primary mb-4">{currentTopic.title}</h1>
       <p class="text-xl text-gray-600 mb-8">{currentTopic.description}</p>
