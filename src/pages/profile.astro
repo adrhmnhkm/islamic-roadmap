@@ -1,0 +1,11 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { UserProfile } from '../components/UserProfile';
+import { ProtectedRoute } from '../components/ProtectedRoute';
+---
+
+<Layout title="Profile - Islamic Roadmap">
+  <ProtectedRoute client:load>
+    <UserProfile client:load />
+  </ProtectedRoute>
+</Layout> 

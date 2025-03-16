@@ -1,4 +1,6 @@
 ---
+import { useAuthStore } from '../store/authStore';
+
 interface Props {
   title: string;
   description: string;
@@ -68,3 +70,80 @@ const totalResources = resourceCount
     </div>
   </div>
 </a>
+
+<script>
+  const initializeProgress = async () => {
+    const authStore = window.useAuthStore;
+    if (!authStore?.getState().isAuthenticated) return;
+
+    const progressSections = document.querySelectorAll('[data-topic-progress]');
+    progressSections.forEach(section => {
+      section.classList.remove('hidden');
+    });
+
+    document.querySelectorAll('[data-topic-card]').forEach(async (card) => {
+      const topicId = card.querySelector('button[data-topic]')?.getAttribute('data-topic');
+      if (!topicId) return;
+
+      try {
+        const status = await authStore.getState().getProgress(topicId);
+        if (status) {
+          const button = card.querySelector(`button[data-status="${status}"]`);
+          if (button) {
+            updateButtonStyles(button as HTMLButtonElement);
+          }
+        }
+      } catch (error) {
+        console.error('Error loading progress:', error);
+      }
+    });
+  };
+
+  const updateButtonStyles = (activeButton: HTMLButtonElement) => {
+    const buttons = activeButton.parentElement?.querySelectorAll('button');
+    if (!buttons) return;
+
+    buttons.forEach(btn => {
+      btn.classList.remove('bg-gray-300', 'bg-yellow-300', 'bg-green-300', 'font-bold');
+      btn.classList.add('font-normal');
+    });
+
+    activeButton.classList.add('font-bold');
+    switch(activeButton.dataset.status) {
+      case 'not_started':
+        activeButton.classList.add('bg-gray-300');
+        break;
+      case 'in_progress':
+        activeButton.classList.add('bg-yellow-300');
+        break;
+      case 'completed':
+        activeButton.classList.add('bg-green-300');
+        break;
+    }
+  };
+
+  document.querySelectorAll('button[data-topic]').forEach(button => {
+    button.addEventListener('click', async (e) => {
+      e.preventDefault();
+      const topic = (button as HTMLElement).dataset.topic;
+      const status = (button as HTMLElement).dataset.status;
+      
+      if (!topic || !status) return;
+
+      try {
+        const authStore = window.useAuthStore;
+        if (!authStore) {
+          console.error('Auth store not found');
+          return;
+        }
+
+        await authStore.getState().updateProgress(topic, status);
+        updateButtonStyles(button as HTMLButtonElement);
+      } catch (error) {
+        console.error('Failed to update progress:', error);
+      }
+    });
+  });
+
+  document.addEventListener('DOMContentLoaded', initializeProgress);
+</script>

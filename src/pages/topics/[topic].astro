@@ -4,8 +4,16 @@ import ResourceLibrary from '../../components/ResourceLibrary.astro';
 import AdditionalResources from '../../components/AdditionalResources.astro';
 import SearchAndFilter from '../../components/SearchAndFilter';
 import LearningRoadmap from '../../components/LearningRoadmap';
-import ProgressTracker from '../../components/ProgressTracker';
 import { topicData } from '../../data/topics';
+
+interface Book {
+  title: string;
+  author: string;
+  description: string;
+  level: string;
+  language: string;
+  downloadUrl: string;
+}
 
 export function getStaticPaths() {
   return Object.keys(topicData).map((topic) => {
@@ -32,15 +40,6 @@ const allResources = [
       <p class="text-xl text-gray-600 mb-8">{currentTopic.description}</p>
 
       <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
-        <h2 class="text-2xl font-bold text-primary mb-4">Progress Pembelajaran</h2>
-        <ProgressTracker client:load topic={{
-          id: currentTopic.id,
-          title: currentTopic.title,
-          totalLessons: currentTopic.totalLessons
-        }} />
-      </div>
-
-      <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
         <h2 class="text-2xl font-bold text-primary mb-4">Alur Pembelajaran {currentTopic.title}</h2>
         <p class="text-gray-600 mb-6">Klik pada setiap tahap untuk melihat sumber pembelajaran yang tersedia.</p>
         <LearningRoadmap client:load nodes={currentTopic.nodes || []} edges={currentTopic.edges || []} />
@@ -49,7 +48,7 @@ const allResources = [
       <SearchAndFilter client:load resources={allResources} />
 
       <div class="space-y-8">
-        <ResourceLibrary books={currentTopic.resources} />
+        <ResourceLibrary books={currentTopic.resources as Book[]} />
         
         {currentTopic.additionalResources && (
           <AdditionalResources resources={currentTopic.additionalResources} />

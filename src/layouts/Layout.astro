@@ -1,4 +1,6 @@
 ---
+import { Navbar } from '../components/Navbar';
+
 interface Props {
   title: string;
   description?: string;
@@ -73,55 +75,7 @@ const {
     </script>
   </head>
   <body class="min-h-screen bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50">
-    <nav class="sticky top-0 z-50 backdrop-blur-md bg-white/70 border-b border-gray-200">
-      <div class="container mx-auto px-4 py-4">
-        <div class="flex justify-between items-center">
-          <a href="/" class="flex items-center">
-            <img src="/logo.svg" alt="Islamic Roadmap" class="h-8" />
-          </a>
-
-          {/* Desktop Menu */}
-          <div class="hidden md:flex space-x-6">
-            <a href="/" class="text-gray-600 hover:text-emerald-600 transition-colors font-medium">Beranda</a>
-            <a href="#topics" class="text-gray-600 hover:text-emerald-600 transition-colors font-medium">Topik</a>
-            <a href="#about" class="text-gray-600 hover:text-emerald-600 transition-colors font-medium">Tentang</a>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button 
-            id="mobile-menu-button"
-            class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
-            aria-label="Menu"
-          >
-            <svg 
-              class="w-6 h-6 text-gray-600" 
-              fill="none" 
-              stroke="currentColor" 
-              viewBox="0 0 24 24"
-            >
-              <path 
-                stroke-linecap="round" 
-                stroke-linejoin="round" 
-                stroke-width="2" 
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            </svg>
-          </button>
-        </div>
-
-        {/* Mobile Menu */}
-        <div 
-          id="mobile-menu"
-          class="hidden md:hidden mt-4 py-4 border-t border-gray-100"
-        >
-          <div class="flex flex-col space-y-4">
-            <a href="/" class="text-gray-600 hover:text-emerald-600 transition-colors font-medium">Beranda</a>
-            <a href="#topics" class="text-gray-600 hover:text-emerald-600 transition-colors font-medium">Topik</a>
-            <a href="#about" class="text-gray-600 hover:text-emerald-600 transition-colors font-medium">Tentang</a>
-          </div>
-        </div>
-      </div>
-    </nav>
+    <Navbar client:load />
 
     <div class="min-h-[calc(100vh-64px)]">
       <slot />
