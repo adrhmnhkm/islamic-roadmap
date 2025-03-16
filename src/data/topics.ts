@@ -59,19 +59,19 @@ export const topicData: Record<string, TopicData> = {
             title: 'Pengenalan Huruf Hijaiyah',
             type: 'video',
             description: 'Video pembelajaran mengenal huruf hijaiyah dan cara membacanya',
-            url: 'https://example.com/hijaiyah',
+            url: 'https://www.youtube.com/watch?v=Le5h-mjGpVI',
             subResources: [
               {
                 title: 'Bentuk Huruf Hijaiyah',
                 type: 'article',
                 description: 'Penjelasan detail tentang bentuk-bentuk huruf hijaiyah',
-                url: 'https://example.com/hijaiyah-forms'
+                url: 'https://www.youtube.com/watch?v=Le5h-mjGpVI'
               },
               {
                 title: 'Latihan Pengucapan',
                 type: 'video',
-                description: 'Praktik pengucapan huruf hijaiyah dengan benar',
-                url: 'https://example.com/hijaiyah-pronunciation'
+                description: 'Praktik pengucapan huruf hijaiyah dengan benar + Tajwid',
+                url: 'https://www.youtube.com/watch?v=VGaBBbLe0Fo'
               }
             ]
           },
@@ -79,7 +79,7 @@ export const topicData: Record<string, TopicData> = {
             title: 'Dasar-dasar Tajwid',
             type: 'video',
             description: 'Pengenalan ilmu tajwid untuk pemula',
-            url: 'https://example.com/tajwid-basics'
+            url: 'https://www.youtube.com/watch?v=rElPtfYamOk'
           }
         ]
       },
@@ -93,13 +93,13 @@ export const topicData: Record<string, TopicData> = {
             title: 'Hukum Tajwid Lanjutan',
             type: 'video',
             description: 'Pembelajaran hukum tajwid yang lebih mendalam',
-            url: 'https://example.com/advanced-tajwid'
+            url: 'https://www.youtube.com/watch?v=ukn3wJY5dhg'
           },
           {
             title: 'Memahami Makna Al-Quran',
             type: 'article',
             description: 'Panduan memahami arti dan tafsir Al-Quran',
-            url: 'https://example.com/quran-meaning'
+            url: 'https://wiz.or.id/pentingnya-memahami-arti-bacaan-al-quran/', 
           }
         ]
       },
@@ -112,7 +112,7 @@ export const topicData: Record<string, TopicData> = {
           {
             title: 'Ulumul Quran',
             type: 'book',
-            description: 'Studi komprehensif tentang ilmu-ilmu Al-Quran',
+            description: 'Studi komprehensif tentang ilmu-ilmu Al-Quran dan pendalamannya',
             url: 'https://example.com/ulumul-quran'
           }
         ]
