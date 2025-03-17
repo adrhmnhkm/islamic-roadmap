@@ -183,14 +183,14 @@ export const topicData: Record<string, TopicData> = {
           {
             title: 'Rukun Iman',
             type: 'video',
-            description: 'Penjelasan tentang 6 rukun iman dalam Islam',
-            url: 'https://example.com/rukun-iman',
+            description: 'Silsilah tentang 6 rukun iman dalam Islam',
+            url: 'https://www.youtube.com/watch?v=6XF5VzhlS_U&list=PLXHX25swM0h_6p03_BC-y_b1qE8Zk8PEz',
             subResources: [
               {
                 title: 'Iman kepada Allah',
                 type: 'article',
                 description: 'Pembahasan mendalam tentang keimanan kepada Allah',
-                url: 'https://example.com/iman-allah'
+                url: 'https://www.youtube.com/watch?v=q1K0CMZ02kk&list=PLXHX25swM0h_6p03_BC-y_b1qE8Zk8PEz&index=2&pp=iAQB'
               }
             ]
           }
@@ -209,6 +209,20 @@ export const topicData: Record<string, TopicData> = {
             url: 'https://example.com/asmaul-husna'
           }
         ]
+      },
+      {
+        id: 'aqeedah-intermediate',
+        label: 'lanjutan',
+        description: 'Pemahaman lebih dalam tentang aqidah',
+        level: 'advanced',
+        resources: [
+          {
+            title: 'Asmaul Husna',
+            type: 'video',
+            description: 'Memahami 99 nama Allah',
+            url: 'https://example.com/asmaul-husna'
+          }
+        ]
       }
     ],
     edges: [
@@ -219,22 +233,22 @@ export const topicData: Record<string, TopicData> = {
     ],
     resources: [
       {
-        title: "Kitab Tauhid",
-        author: "Syaikh Muhammad bin Abdul Wahhab",
+        title: "Kitab Al-Iman",
+        author: "Syaikh Na'im Yasin",
         description: "Penjelasan mendasar tentang tauhid dalam Islam",
         level: "Pemula",
-        language: "Indonesia",
-        downloadUrl: "https://example.com/kitab-tauhid"
+        language: "Arab",
+        downloadUrl: "https://archive.org/details/al-eman_book"
       }
     ],
     additionalResources: [
       {
-        title: "Pengantar Ilmu Tauhid",
-        author: "Ustadz Abdul Somad",
+        title: "Pemetaan Bahasan Dalam Aqidah",
+        author: "Ustadz Nidhol Masyhud",
         type: "video",
-        description: "Seri video pembelajaran dasar-dasar tauhid",
+        description: "Seri video tauhid",
         language: "Indonesia",
-        url: "https://example.com/tauhid-intro",
+        url: "https://www.youtube.com/watch?v=XOK-Y_zhGaA&t=2815s",
         platform: "YouTube"
       }
     ]
