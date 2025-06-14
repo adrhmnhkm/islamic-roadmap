@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { create } from 'zustand';
+import { useProgressStore } from '../store/progressStore';
 
 interface QuizStore {
   completedQuizzes: Record<string, boolean>;
@@ -22,16 +23,28 @@ interface Question {
 
 interface QuizProps {
   lessonId: string;
+  topicId?: string; // Add topicId for progress tracking
   questions: Question[];
   onComplete: () => void;
 }
 
-const Quiz: React.FC<QuizProps> = ({ lessonId, questions, onComplete = () => {} }) => {
+const Quiz: React.FC<QuizProps> = ({ lessonId, topicId, questions, onComplete = () => {} }) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
   const [showResults, setShowResults] = useState(false);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
+  const [sessionId, setSessionId] = useState<string | null>(null);
+  
   const markQuizComplete = useQuizStore((state) => state.markQuizComplete);
+  const progressStore = useProgressStore();
+
+  // Start study session when quiz begins (only run once)
+  React.useEffect(() => {
+    if (topicId && !sessionId) {
+      const id = progressStore.startStudySession(topicId);
+      setSessionId(id);
+    }
+  }, [topicId]); // Remove sessionId and progressStore from dependencies
 
   const handleAnswer = (selectedOption: number) => {
     setSelectedAnswer(selectedOption);
@@ -48,6 +61,26 @@ const Quiz: React.FC<QuizProps> = ({ lessonId, questions, onComplete = () => {} 
     } else {
       setShowResults(true);
       markQuizComplete(lessonId);
+      
+      // End study session and update progress
+      if (sessionId && topicId) {
+        const percentage = (score + (selectedAnswer === questions[currentQuestion].correctAnswer ? 1 : 0)) / questions.length * 100;
+        progressStore.endStudySession(sessionId, percentage);
+        
+        // If quiz passed (70%+), update topic progress
+        if (percentage >= 70) {
+          const currentProgress = progressStore.getTopicProgress(topicId);
+          if (currentProgress) {
+            const newCompletedLessons = Math.min(
+              currentProgress.completedLessons + 1, 
+              currentProgress.totalLessons
+            );
+            const status = newCompletedLessons === currentProgress.totalLessons ? 'completed' : 'in_progress';
+            progressStore.updateTopicProgress(topicId, status, newCompletedLessons);
+          }
+        }
+      }
+      
       if (typeof onComplete === 'function') {
         onComplete();
       }
@@ -63,7 +96,12 @@ const Quiz: React.FC<QuizProps> = ({ lessonId, questions, onComplete = () => {} 
           Skor Anda {score} dari {questions.length} ({percentage.toFixed(1)}%)
         </p>
         {percentage >= 70 ? (
-          <p className="text-green-600">Selamat! Anda telah lulus kuis!</p>
+          <div className="text-green-600">
+            <p className="mb-2">🎉 Selamat! Anda telah lulus kuis!</p>
+            {topicId && (
+              <p className="text-sm">Progress pembelajaran Anda telah diperbarui.</p>
+            )}
+          </div>
         ) : (
           <p className="text-red-600">Silakan pelajari kembali materi dan coba lagi kuisnya.</p>
         )}
@@ -75,9 +113,17 @@ const Quiz: React.FC<QuizProps> = ({ lessonId, questions, onComplete = () => {} 
 
   return (
     <div className="bg-white p-6 rounded-lg shadow-md">
-      <h3 className="text-2xl font-bold text-primary mb-4">
-        Pertanyaan {currentQuestion + 1} dari {questions.length}
-      </h3>
+      <div className="flex justify-between items-center mb-4">
+        <h3 className="text-2xl font-bold text-primary">
+          Pertanyaan {currentQuestion + 1} dari {questions.length}
+        </h3>
+        {sessionId && (
+          <div className="text-sm text-gray-500 flex items-center">
+            <span className="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></span>
+            Sesi belajar aktif
+          </div>
+        )}
+      </div>
       <p className="text-lg mb-6">{question.question}</p>
       <div className="space-y-4">
         {question.options.map((option, index) => (

@@ -1,0 +1,320 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { TopicProgressTracker } from '../components/TopicProgressTracker';
+import { ProgressDataManager } from '../components/ProgressDataManager';
+import { LearningGoals } from '../components/LearningGoals';
+
+// Demo data for Al-Quran matching the TopicProgressTracker interface
+const demoTopicData = {
+  id: 'quran',
+  title: 'Al-Quran',
+  description: 'Pembelajaran mendalam tentang Al-Quran sebagai pedoman hidup umat Islam',
+  nodes: [
+    // Basic Level Node
+    {
+      id: 'basic-quran',
+      label: 'Dasar-dasar Al-Quran',
+      description: 'Pengenalan fundamental Al-Quran',
+      level: 'basic' as const,
+      resources: [
+        {
+          title: 'Pengenalan Al-Quran',
+          type: 'video' as const,
+          description: 'Video pengantar tentang Al-Quran sebagai kitab suci',
+          url: '#'
+        },
+        {
+          title: 'Sejarah Turunnya Al-Quran',
+          type: 'article' as const,
+          description: 'Artikel tentang proses pewahyuan Al-Quran',
+          url: '#'
+        },
+        {
+          title: 'Struktur dan Organisasi Al-Quran',
+          type: 'book' as const,
+          description: 'Buku panduan tentang susunan surat dan ayat',
+          url: '#'
+        },
+        {
+          title: 'Keutamaan Membaca Al-Quran',
+          type: 'video' as const,
+          description: 'Video tentang pahala dan manfaat membaca Al-Quran',
+          url: '#'
+        }
+      ]
+    },
+    
+    // Intermediate Level Node
+    {
+      id: 'intermediate-quran',
+      label: 'Pemahaman Al-Quran',
+      description: 'Mempelajari tafsir dan pemahaman mendalam',
+      level: 'intermediate' as const,
+      resources: [
+        {
+          title: 'Tafsir Surah Al-Fatihah',
+          type: 'video' as const,
+          description: 'Penjelasan detail tafsir surah pembuka',
+          url: '#'
+        },
+        {
+          title: 'Makki dan Madani dalam Al-Quran',
+          type: 'article' as const,
+          description: 'Perbedaan karakteristik ayat Makki dan Madani',
+          url: '#'
+        },
+        {
+          title: 'Asbabun Nuzul',
+          type: 'book' as const,
+          description: 'Kitab tentang sebab-sebab turunnya ayat',
+          url: '#'
+        },
+        {
+          title: 'Metode Tadabbur Al-Quran',
+          type: 'video' as const,
+          description: 'Cara merenungkan dan memahami Al-Quran',
+          url: '#'
+        },
+        {
+          title: 'Mukjizat Ilmiah dalam Al-Quran',
+          type: 'article' as const,
+          description: 'Artikel tentang keajaiban ilmiah dalam Al-Quran',
+          url: '#'
+        }
+      ]
+    },
+    
+    // Advanced Level Node
+    {
+      id: 'advanced-quran',
+      label: 'Ilmu Al-Quran Lanjutan',
+      description: 'Studi mendalam tentang ulumul Quran',
+      level: 'advanced' as const,
+      resources: [
+        {
+          title: 'Ulumul Quran Komprehensif',
+          type: 'book' as const,
+          description: 'Studi komprehensif tentang ilmu-ilmu Al-Quran',
+          url: '#'
+        },
+        {
+          title: 'Metodologi Tafsir Modern',
+          type: 'video' as const,
+          description: 'Pendekatan kontemporer dalam menafsirkan Al-Quran',
+          url: '#'
+        },
+        {
+          title: 'Quranic Linguistics',
+          type: 'article' as const,
+          description: 'Studi linguistik dan bahasa dalam Al-Quran',
+          url: '#'
+        }
+      ]
+    }
+  ]
+};
+
+// Calculate total resources
+const totalResources = demoTopicData.nodes.reduce((total, node) => {
+  return total + node.resources.length;
+}, 0);
+---
+
+<Layout title="Demo Progress - Islamic Roadmap">
+  <main class="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
+    <!-- Header Section -->
+    <section class="bg-gradient-to-r from-blue-600 via-purple-600 to-blue-700 text-white">
+      <div class="container mx-auto px-4 py-12">
+        <div class="text-center max-w-4xl mx-auto">
+          <div class="inline-flex items-center justify-center w-16 h-16 bg-white/20 rounded-full mb-6">
+            <span class="text-3xl">🚀</span>
+          </div>
+          <h1 class="text-4xl md:text-5xl font-bold mb-4">
+            Demo Progress Tracker
+          </h1>
+          <p class="text-xl text-blue-100 mb-6 leading-relaxed">
+            Rasakan pengalaman tracking progress pembelajaran dengan data contoh Al-Quran. 
+            Fitur lengkap untuk mengelola perjalanan belajar Anda.
+          </p>
+          
+          <!-- Quick Stats -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl mx-auto">
+            <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4">
+              <div class="text-2xl font-bold">{totalResources}</div>
+              <div class="text-sm text-blue-200">Total Resources</div>
+            </div>
+            <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4">
+              <div class="text-2xl font-bold">{demoTopicData.nodes.length}</div>
+              <div class="text-sm text-blue-200">Learning Modules</div>
+            </div>
+            <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4">
+              <div class="text-2xl font-bold">3</div>
+              <div class="text-sm text-blue-200">Difficulty Levels</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="py-8">
+      <div class="container mx-auto px-4 max-w-7xl">
+        
+        <!-- Demo Notice -->
+        <div class="mb-8">
+          <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-xl p-6 shadow-sm">
+            <div class="flex items-start space-x-4">
+              <div class="flex-shrink-0">
+                <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                  <span class="text-blue-600 text-lg">ℹ️</span>
+                </div>
+              </div>
+              <div class="flex-1">
+                <h3 class="text-lg font-semibold text-blue-900 mb-2">Mode Demo Aktif</h3>
+                <p class="text-blue-800 text-sm leading-relaxed mb-3">
+                  Ini adalah halaman demo dengan data Al-Quran. Progress yang Anda buat akan tersimpan di browser 
+                  dan dapat diekspor untuk backup. Semua fitur dapat dicoba secara penuh.
+                </p>
+                <div class="flex flex-wrap gap-2">
+                  <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                    📊 Progress Tracking
+                  </span>
+                  <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                    🎯 Goal Setting
+                  </span>
+                  <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
+                    💾 Data Export/Import
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Management Tools Grid -->
+        <div class="mb-12">
+          <div class="text-center mb-8">
+            <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
+              Tools Pembelajaran
+            </h2>
+            <p class="text-gray-600 max-w-2xl mx-auto">
+              Kelola progress, set target, dan pantau pencapaian dengan tools yang mudah digunakan
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <!-- Data Management -->
+            <div class="order-1 lg:order-1">
+              <div class="h-full">
+                <ProgressDataManager 
+                  client:load
+                  topicId={demoTopicData.id}
+                  topicTitle={demoTopicData.title}
+                />
+              </div>
+            </div>
+
+            <!-- Learning Goals -->
+            <div class="order-2 lg:order-2">
+              <div class="h-full">
+                <LearningGoals
+                  client:load
+                  topicId={demoTopicData.id}
+                  topicTitle={demoTopicData.title}
+                  totalResources={totalResources}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Progress Tracker Section -->
+        <div class="mb-8">
+          <div class="text-center mb-8">
+            <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
+              Progress Tracker
+            </h2>
+            <p class="text-gray-600 max-w-2xl mx-auto">
+              Tandai progress pembelajaran, berikan rating, dan tulis catatan untuk setiap resource
+            </p>
+          </div>
+
+          <TopicProgressTracker 
+            client:load
+            topicId={demoTopicData.id}
+            topicTitle={demoTopicData.title}
+            topicDescription={demoTopicData.description}
+            nodes={demoTopicData.nodes}
+          />
+        </div>
+
+        <!-- Help & Quick Actions -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <!-- How to Use Guide -->
+          <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+              <span class="mr-2">📖</span>
+              Panduan Penggunaan
+            </h3>
+            <div class="space-y-3">
+              <div class="flex items-start space-x-3">
+                <span class="flex-shrink-0 w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-medium">1</span>
+                <p class="text-sm text-gray-600"><strong>Set Target:</strong> Klik "Set Target" untuk mengatur goal pembelajaran</p>
+              </div>
+              <div class="flex items-start space-x-3">
+                <span class="flex-shrink-0 w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-medium">2</span>
+                <p class="text-sm text-gray-600"><strong>Mark Progress:</strong> Klik status icon (✅⏳⬜) untuk update progress</p>
+              </div>
+              <div class="flex items-start space-x-3">
+                <span class="flex-shrink-0 w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-medium">3</span>
+                <p class="text-sm text-gray-600"><strong>Add Notes:</strong> Tulis catatan dan berikan rating untuk resource</p>
+              </div>
+              <div class="flex items-start space-x-3">
+                <span class="flex-shrink-0 w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-medium">4</span>
+                <p class="text-sm text-gray-600"><strong>Export Data:</strong> Backup progress dengan fitur export/import</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Actions -->
+          <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+              <span class="mr-2">🚀</span>
+              Aksi Cepat
+            </h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <a 
+                href="/topics/quran"
+                class="inline-flex items-center justify-center px-4 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors text-sm font-medium"
+              >
+                <span class="mr-2">📖</span>
+                Roadmap Asli
+              </a>
+              <a 
+                href="/analytics"
+                class="inline-flex items-center justify-center px-4 py-3 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition-colors text-sm font-medium"
+              >
+                <span class="mr-2">📊</span>
+                Analytics
+              </a>
+              <a 
+                href="/topics"
+                class="inline-flex items-center justify-center px-4 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors text-sm font-medium"
+              >
+                <span class="mr-2">📚</span>
+                Semua Topik
+              </a>
+              <a 
+                href="/"
+                class="inline-flex items-center justify-center px-4 py-3 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors text-sm font-medium"
+              >
+                <span class="mr-2">🏠</span>
+                Beranda
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout> 

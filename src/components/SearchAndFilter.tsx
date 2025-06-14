@@ -33,8 +33,8 @@ const SearchAndFilter: React.FC<SearchAndFilterProps> = ({ resources }) => {
 
   const filterResources = () => {
     const resourceElements = document.querySelectorAll('[data-resource]');
-    resourceElements.forEach(element => {
-      const resourceData = element.getAttribute('data-resource');
+    resourceElements.forEach(resourceElement => {
+      const resourceData = resourceElement.getAttribute('data-resource');
       if (!resourceData) return;
       
       const resource = JSON.parse(resourceData);
@@ -52,7 +52,7 @@ const SearchAndFilter: React.FC<SearchAndFilterProps> = ({ resources }) => {
         matchesFilters = matchesFilters && filters.type.includes(resource.type);
       }
 
-      element.style.display = matchesSearch && matchesFilters ? '' : 'none';
+      (resourceElement as HTMLElement).style.display = matchesSearch && matchesFilters ? '' : 'none';
     });
   };
 
@@ -73,9 +73,9 @@ const SearchAndFilter: React.FC<SearchAndFilterProps> = ({ resources }) => {
   };
 
   // Get unique values for filters
-  const languages = [...new Set(resources.map(r => r.language))];
-  const levels = [...new Set(resources.filter(r => r.level).map(r => r.level as string))];
-  const types = [...new Set(resources.map(r => r.type))];
+  const languages = Array.from(new Set(resources.map(r => r.language)));
+  const levels = Array.from(new Set(resources.filter(r => r.level).map(r => r.level as string)));
+  const types = Array.from(new Set(resources.map(r => r.type)));
 
   return (
     <div className="bg-white rounded-lg shadow-md p-6 mb-8">

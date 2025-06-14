@@ -16,31 +16,34 @@ export const Navbar = () => {
           <div className="flex items-center space-x-4">
             {isAuthenticated ? (
               <>
-                <a href="/profile" className="text-gray-700 hover:text-gray-900">
+                <a href="/demo-progress" className="text-gray-700 hover:text-gray-900 flex items-center">
+                  <span className="mr-1">✅</span>
+                  Demo Progress
+                </a>
+                <a href="/analytics" className="text-gray-700 hover:text-gray-900 flex items-center">
+                  <span className="mr-1">📊</span>
+                  Analytics
+                </a>
+                <a href="/profile" className="text-gray-700 hover:text-gray-900 flex items-center">
+                  <span className="mr-1">👤</span>
                   Profile
                 </a>
                 <button
                   onClick={logout}
-                  className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md text-sm"
+                  className="text-gray-700 hover:text-gray-900"
                 >
                   Logout
                 </button>
               </>
             ) : (
-              <div className="flex space-x-4">
-                <a
-                  href="/login"
-                  className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md text-sm"
-                >
+              <>
+                <a href="/login" className="text-gray-700 hover:text-gray-900">
                   Login
                 </a>
-                <a
-                  href="/signup"
-                  className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md text-sm"
-                >
-                  Sign Up
+                <a href="/register" className="text-gray-700 hover:text-gray-900">
+                  Register
                 </a>
-              </div>
+              </>
             )}
           </div>
         </div>

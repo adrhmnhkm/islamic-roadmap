@@ -37,7 +37,7 @@ const guides = [
     language: 'Indonesia'
   },
   {
-    title: "TAFSIR AL-QUR’AN: RELATIF ATAU ABSOLUT?",
+    title: "TAFSIR AL-QUR'AN: RELATIF ATAU ABSOLUT?",
     url: 'https://www.akidah.net/tafsir-al-quran-relatif-atau-absolut/',
     language: 'English'
   },
@@ -47,7 +47,7 @@ const guides = [
     language: 'Indonesia'
   },
   {
-    title: 'SUMBER PENGETAHUAN (MASÂDIR AL-MA‘RIFAH) IBNU TAIMIYAH',
+    title: 'SUMBER PENGETAHUAN (MASÂDIR AL-MA\'RIFAH) IBNU TAIMIYAH',
     url: 'https://www.akidah.net/sumber-pengetahuan-masadir-al-marifah-ibnu-taimiyah/',
     language: 'English'
   }
@@ -94,6 +94,97 @@ const latestChangelog = changelog.slice(0, 5);
           {topics.map(topic => (
             <TopicCard {...topic} />
           ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- New Progress Tracking Feature Section -->
+    <section class="py-20 bg-gradient-to-br from-blue-50 via-purple-50 to-indigo-50">
+      <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto">
+          <div class="text-center mb-12">
+            <div class="flex items-center justify-center gap-3 mb-4">
+              <span class="text-4xl">✅</span>
+              <h2 class="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                Lacak Progress Pembelajaran Anda
+              </h2>
+            </div>
+            <p class="text-gray-600 max-w-2xl mx-auto">
+              Fitur baru! Sekarang Anda dapat melacak progress pembelajaran untuk setiap resource, menambahkan catatan personal, dan memberikan rating.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            <div class="bg-white/60 backdrop-blur-sm rounded-xl p-6 shadow-lg">
+              <div class="text-3xl mb-4">📋</div>
+              <h3 class="text-lg font-semibold text-gray-800 mb-2">Resource Checklist</h3>
+              <p class="text-gray-600 text-sm">
+                Tandai resource sebagai selesai, sedang dipelajari, atau belum dimulai dengan sistem checklist yang intuitif.
+              </p>
+            </div>
+
+            <div class="bg-white/60 backdrop-blur-sm rounded-xl p-6 shadow-lg">
+              <div class="text-3xl mb-4">📝</div>
+              <h3 class="text-lg font-semibold text-gray-800 mb-2">Catatan Personal</h3>
+              <p class="text-gray-600 text-sm">
+                Tambahkan catatan pribadi untuk setiap resource yang Anda pelajari untuk referensi di masa depan.
+              </p>
+            </div>
+
+            <div class="bg-white/60 backdrop-blur-sm rounded-xl p-6 shadow-lg">
+              <div class="text-3xl mb-4">⭐</div>
+              <h3 class="text-lg font-semibold text-gray-800 mb-2">Rating & Review</h3>
+              <p class="text-gray-600 text-sm">
+                Berikan rating 1-5 bintang untuk resource yang telah selesai dan bantu komunitas dengan review Anda.
+              </p>
+            </div>
+
+            <div class="bg-white/60 backdrop-blur-sm rounded-xl p-6 shadow-lg">
+              <div class="text-3xl mb-4">📊</div>
+              <h3 class="text-lg font-semibold text-gray-800 mb-2">Progress Analytics</h3>
+              <p class="text-gray-600 text-sm">
+                Lihat statistik pembelajaran Anda dengan progress bar per level dan analytics keseluruhan.
+              </p>
+            </div>
+
+            <div class="bg-white/60 backdrop-blur-sm rounded-xl p-6 shadow-lg">
+              <div class="text-3xl mb-4">🎯</div>
+              <h3 class="text-lg font-semibold text-gray-800 mb-2">Level-based Learning</h3>
+              <p class="text-gray-600 text-sm">
+                Filter resource berdasarkan level (Dasar, Menengah, Lanjutan) sesuai kemampuan Anda.
+              </p>
+            </div>
+
+            <div class="bg-white/60 backdrop-blur-sm rounded-xl p-6 shadow-lg">
+              <div class="text-3xl mb-4">💾</div>
+              <h3 class="text-lg font-semibold text-gray-800 mb-2">Data Tersimpan</h3>
+              <p class="text-gray-600 text-sm">
+                Semua progress dan catatan Anda tersimpan secara otomatis dan tidak akan hilang.
+              </p>
+            </div>
+          </div>
+
+          <div class="text-center">
+            <div class="flex flex-wrap gap-4 justify-center">
+              <a 
+                href="/demo-progress"
+                class="inline-flex items-center px-6 py-3 text-white bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5"
+              >
+                <span class="mr-2">🧪</span>
+                Coba Demo Progress
+              </a>
+              <a 
+                href="/topics/quran/progress"
+                class="inline-flex items-center px-6 py-3 text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+              >
+                <span class="mr-2">📖</span>
+                Progress Al-Quran
+              </a>
+            </div>
+            <p class="text-sm text-gray-500 mt-4">
+              💡 Tip: Hover pada topic card di atas untuk melihat tombol "Progress"
+            </p>
+          </div>
         </div>
       </div>
     </section>

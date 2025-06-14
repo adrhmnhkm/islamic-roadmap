@@ -10,6 +10,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/check": "^0.9.4",
     "@astrojs/react": "^3.0.10",
     "@astrojs/tailwind": "^5.1.0",
     "@jsplumb/browser-ui": "^6.2.10",
@@ -26,6 +27,6 @@
     "@astrojs/compiler": "^2.10.4",
     "@types/react": "^18.0.21",
     "astro": "^5.3.0",
-    "typescript": "^5.7.3"
+    "typescript": "^5.8.3"
   }
 }

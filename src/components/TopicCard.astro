@@ -20,56 +20,75 @@ const totalResources = resourceCount
   : 0;
 ---
 
-<a href={slug ? `/topics/${slug}` : '#'} class="group">
-  <div class="h-full p-6 rounded-2xl bg-white/60 backdrop-blur-sm border border-gray-100 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-    <div class="text-4xl mb-4 transform group-hover:scale-110 transition-transform duration-300">
-      {icon}
-    </div>
-    <h3 class="text-xl font-bold text-gray-800 mb-2 group-hover:text-emerald-600 transition-colors">
-      {title}
-    </h3>
-    <p class="text-gray-600 mb-4">{description}</p>
-    
-    <div class="border-t pt-4">
-      <div class="space-y-3">
-        <div class="text-sm font-medium text-gray-500">
-          {totalResources} Sumber Belajar
-        </div>
-        {resourceCount && (
-          <div class="flex flex-wrap gap-2 text-sm">
-            {resourceCount.videos > 0 && (
-              <div class="inline-flex items-center px-2 py-1 bg-blue-50 text-blue-700 rounded-full">
-                <svg class="w-4 h-4 mr-1" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M4 8H2v12a2 2 0 002 2h12v-2H4V8z"/>
-                  <path d="M20 2H8a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V4a2 2 0 00-2-2zm-9 12V6l7 4-7 4z"/>
-                </svg>
-                <span>{resourceCount.videos} Video</span>
-              </div>
-            )}
-            {resourceCount.articles > 0 && (
-              <div class="inline-flex items-center px-2 py-1 bg-purple-50 text-purple-700 rounded-full">
-                <svg class="w-4 h-4 mr-1" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zm4 18H6V4h7v5h5v11z"/>
-                  <path d="M8 14h8v2H8zm0-4h8v2H8z"/>
-                </svg>
-                <span>{resourceCount.articles} Artikel</span>
-              </div>
-            )}
-            {resourceCount.books > 0 && (
-              <div class="inline-flex items-center px-2 py-1 bg-emerald-50 text-emerald-700 rounded-full">
-                <svg class="w-4 h-4 mr-1" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M21 4H3a1 1 0 00-1 1v14a1 1 0 001 1h18a1 1 0 001-1V5a1 1 0 00-1-1zm-1 14H4V6h16v12z"/>
-                  <path d="M8 8h8v2H8zm0 4h8v2H8z"/>
-                </svg>
-                <span>{resourceCount.books} Buku</span>
-              </div>
-            )}
+<div class="group relative">
+  <a href={slug ? `/topics/${slug}` : '#'} class="block">
+    <div class="h-full p-6 rounded-2xl bg-white/60 backdrop-blur-sm border border-gray-100 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+      <div class="text-4xl mb-4 transform group-hover:scale-110 transition-transform duration-300">
+        {icon}
+      </div>
+      <h3 class="text-xl font-bold text-gray-800 mb-2 group-hover:text-emerald-600 transition-colors">
+        {title}
+      </h3>
+      <p class="text-gray-600 mb-4">{description}</p>
+      
+      <div class="border-t pt-4">
+        <div class="space-y-3">
+          <div class="text-sm font-medium text-gray-500">
+            {totalResources} Sumber Belajar
           </div>
-        )}
+          {resourceCount && (
+            <div class="flex flex-wrap gap-2 text-sm">
+              {resourceCount.videos > 0 && (
+                <div class="inline-flex items-center px-2 py-1 bg-blue-50 text-blue-700 rounded-full">
+                  <svg class="w-4 h-4 mr-1" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M4 8H2v12a2 2 0 002 2h12v-2H4V8z"/>
+                    <path d="M20 2H8a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V4a2 2 0 00-2-2zm-9 12V6l7 4-7 4z"/>
+                  </svg>
+                  <span>{resourceCount.videos} Video</span>
+                </div>
+              )}
+              {resourceCount.articles > 0 && (
+                <div class="inline-flex items-center px-2 py-1 bg-purple-50 text-purple-700 rounded-full">
+                  <svg class="w-4 h-4 mr-1" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zm4 18H6V4h7v5h5v11z"/>
+                    <path d="M8 14h8v2H8zm0-4h8v2H8z"/>
+                  </svg>
+                  <span>{resourceCount.articles} Artikel</span>
+                </div>
+              )}
+              {resourceCount.books > 0 && (
+                <div class="inline-flex items-center px-2 py-1 bg-emerald-50 text-emerald-700 rounded-full">
+                  <svg class="w-4 h-4 mr-1" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M21 4H3a1 1 0 00-1 1v14a1 1 0 001 1h18a1 1 0 001-1V5a1 1 0 00-1-1zm-1 14H4V6h16v12z"/>
+                    <path d="M8 8h8v2H8zm0 4h8v2H8z"/>
+                  </svg>
+                  <span>{resourceCount.books} Buku</span>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
       </div>
     </div>
-  </div>
-</a>
+  </a>
+
+  <!-- Progress Tracking Button -->
+  {slug && (
+    <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+      <a 
+        href={`/topics/${slug}/progress`}
+        class="inline-flex items-center px-3 py-2 bg-blue-500 text-white text-sm rounded-lg hover:bg-blue-600 transition-colors shadow-lg"
+        title="Lacak Progress"
+        onclick="event.stopPropagation()"
+      >
+        <svg class="w-4 h-4 mr-1" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        Progress
+      </a>
+    </div>
+  )}
+</div>
 
 <script>
   const initializeProgress = async () => {
