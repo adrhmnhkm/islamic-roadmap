@@ -95,7 +95,7 @@ export const useAuthStore = create<AuthState>()(
           
           if (authError) {
             console.error('Login error:', authError)
-            throw new Error('Email atau password salah')
+            throw authError
           }
           
           if (!authData.user) {
