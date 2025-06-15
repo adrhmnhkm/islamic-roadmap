@@ -1,0 +1,6 @@
+# Maintenance mode - redirect all admin and API routes to homepage
+/admin/* / 302
+/api/* / 302
+
+# SPA fallback for other routes
+/* /index.html 200 
