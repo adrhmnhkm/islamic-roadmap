@@ -1,4 +1,4 @@
-import { useAuthStore } from '../store/authStore'
+import { useAuthStore } from '../stores/authStore'
 import { useUserProgressStore } from '../store/userProgressStore'
 
 interface TopicNodeProps {

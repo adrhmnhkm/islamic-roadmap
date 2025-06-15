@@ -1,0 +1,493 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Newsletter Management - Islamic Roadmap Admin">
+  <div class="min-h-screen bg-gray-50">
+    <!-- Admin Navigation -->
+    <div class="bg-white shadow-sm border-b">
+      <div class="container mx-auto px-4">
+        <div class="flex items-center justify-between h-16">
+          <div class="flex items-center space-x-4">
+            <a href="/admin" class="text-blue-600 hover:text-blue-800 flex items-center">
+              <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+              </svg>
+              Back to Admin
+            </a>
+            <span class="text-gray-300">|</span>
+            <h1 class="text-xl font-semibold text-gray-800">📧 Newsletter Management</h1>
+          </div>
+        </div>
+          </div>
+        </div>
+
+    <div class="container mx-auto px-4 py-8">
+      <!-- Newsletter Stats -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div class="bg-white rounded-lg shadow p-6">
+          <div class="flex items-center">
+            <div class="p-2 bg-blue-100 rounded-lg">
+              <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+              </svg>
+            </div>
+            <div class="ml-4">
+              <p class="text-sm font-medium text-gray-600">Total Subscribers</p>
+              <p class="text-2xl font-bold text-gray-900" id="subscriber-count">Loading...</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow p-6">
+          <div class="flex items-center">
+            <div class="p-2 bg-green-100 rounded-lg">
+              <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+              </svg>
+            </div>
+            <div class="ml-4">
+              <p class="text-sm font-medium text-gray-600">Newsletter Sent</p>
+              <p class="text-2xl font-bold text-gray-900" id="newsletters-sent">0</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow p-6">
+          <div class="flex items-center">
+            <div class="p-2 bg-purple-100 rounded-lg">
+              <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+              </svg>
+            </div>
+            <div class="ml-4">
+              <p class="text-sm font-medium text-gray-600">Status</p>
+              <p class="text-2xl font-bold text-green-600" id="newsletter-status">Ready</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Newsletter Broadcast Form -->
+      <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+        <div class="flex items-center mb-6">
+          <div class="p-2 bg-blue-100 rounded-lg mr-4">
+            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+            </svg>
+          </div>
+          <h2 class="text-2xl font-bold text-gray-800">📤 Broadcast Newsletter</h2>
+        </div>
+
+        <form id="broadcast-form" class="space-y-6">
+          <!-- Subject -->
+          <div>
+            <label for="subject" class="block text-sm font-medium text-gray-700 mb-2">
+              📧 Email Subject *
+            </label>
+            <input 
+              type="text" 
+              id="subject" 
+              name="subject" 
+              required
+              placeholder="e.g., ✨ Update Terbaru: Resource Hadits Shahih Bukhari"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            />
+          </div>
+
+          <!-- Title -->
+          <div>
+            <label for="title" class="block text-sm font-medium text-gray-700 mb-2">
+              📰 Newsletter Title *
+            </label>
+            <input 
+              type="text" 
+              id="title" 
+              name="title" 
+              required
+              placeholder="e.g., Resource Hadits Terbaru Telah Ditambahkan!"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            />
+          </div>
+
+          <!-- Category -->
+          <div>
+            <label for="category" class="block text-sm font-medium text-gray-700 mb-2">
+              📚 Category (Optional)
+            </label>
+            <select 
+              id="category" 
+              name="category" 
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            >
+              <option value="">Select Category</option>
+              <option value="Al-Quran & Tajwid">📖 Al-Quran & Tajwid</option>
+              <option value="Hadits & Sunnah">📜 Hadits & Sunnah</option>
+              <option value="Akidah">💡 Akidah</option>
+              <option value="Ibadah & Fiqh">🕌 Ibadah & Fiqh</option>
+              <option value="Akhlak & Tasawuf">✨ Akhlak & Tasawuf</option>
+              <option value="Sejarah Islam">📚 Sejarah Islam</option>
+              <option value="Update Website">🔄 Update Website</option>
+            </select>
+          </div>
+
+          <!-- Preview Text -->
+          <div>
+            <label for="previewText" class="block text-sm font-medium text-gray-700 mb-2">
+              👁️ Preview Text (Optional)
+            </label>
+            <input 
+              type="text" 
+              id="previewText" 
+              name="previewText" 
+              placeholder="Short preview that will appear highlighted in the email"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            />
+            <p class="text-sm text-gray-500 mt-1">This will appear as a highlighted preview box in the email</p>
+          </div>
+
+          <!-- Article URL -->
+          <div>
+            <label for="articleUrl" class="block text-sm font-medium text-gray-700 mb-2">
+              🔗 Article/Resource URL (Optional)
+            </label>
+            <input 
+              type="url" 
+              id="articleUrl" 
+              name="articleUrl" 
+              placeholder="https://islamicroadmap.com/topics/hadits"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            />
+            <p class="text-sm text-gray-500 mt-1">Will create a "Read More" button in the email</p>
+        </div>
+
+          <!-- Main Content -->
+          <div>
+            <label for="content" class="block text-sm font-medium text-gray-700 mb-2">
+              ✍️ Newsletter Content *
+            </label>
+            <textarea 
+              id="content" 
+              name="content" 
+              rows="8" 
+              required
+              placeholder="Assalamu'alaikum warahmatullahi wabarakatuh,
+
+Alhamdulillahi rabbil alamiin, kami dengan senang hati mengumumkan bahwa resource pembelajaran Hadits terbaru telah ditambahkan ke Islamic Roadmap!
+
+📚 Yang Baru:
+- 50+ Hadits Shahih Bukhari dengan terjemahan
+- Video penjelasan dari ustadz terpercaya  
+- Quiz interaktif untuk pemahaman
+- Progress tracking otomatis
+
+Kami berharap resource ini dapat membantu perjalanan pembelajaran Islam Anda. Jangan lupa untuk memberikan rating dan feedback setelah mempelajarinya.
+
+Barakallahu feekum wa jazakumullahu khairan.
+
+Tim Islamic Roadmap"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-vertical"
+            ></textarea>
+            <p class="text-sm text-gray-500 mt-1">Use line breaks for paragraphs. HTML tags will be converted automatically.</p>
+      </div>
+
+          <!-- Preview & Send Buttons -->
+          <div class="flex flex-col sm:flex-row gap-4 pt-6">
+              <button 
+              type="button" 
+              id="preview-btn"
+              class="flex-1 bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 font-medium transition-colors"
+              >
+              👀 Preview Email
+              </button>
+              <button 
+              type="submit" 
+              id="send-btn"
+              class="flex-1 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 font-medium transition-colors"
+              >
+              📤 Send to All Subscribers
+              </button>
+            </div>
+        </form>
+
+        <!-- Status Messages -->
+        <div id="broadcast-status" class="mt-6 hidden">
+          <div class="p-4 rounded-lg" id="status-message">
+            <!-- Status message will be inserted here -->
+          </div>
+          </div>
+        </div>
+
+      <!-- Recent Newsletters -->
+      <div class="bg-white rounded-lg shadow-md p-6">
+        <h3 class="text-xl font-bold text-gray-800 mb-4">📋 Recent Newsletters</h3>
+        <div class="text-gray-500 text-center py-8">
+          <p>Newsletter history will be displayed here</p>
+          <p class="text-sm mt-2">Feature coming soon...</p>
+        </div>
+      </div>
+    </div>
+        </div>
+
+  <!-- Preview Modal -->
+  <div id="preview-modal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden">
+    <div class="flex items-center justify-center min-h-screen p-4">
+      <div class="bg-white rounded-lg max-w-2xl w-full max-h-screen overflow-y-auto">
+        <div class="p-6">
+          <div class="flex justify-between items-center mb-4">
+            <h3 class="text-lg font-semibold">📧 Email Preview</h3>
+            <button id="close-preview" class="text-gray-500 hover:text-gray-700">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+              </svg>
+            </button>
+          </div>
+          <div id="preview-content" class="border rounded-lg p-4 bg-gray-50">
+            <!-- Preview content will be inserted here -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Check authentication and admin status
+    document.addEventListener('DOMContentLoaded', function() {
+      const authData = localStorage.getItem('auth-storage');
+      
+      if (!authData) {
+        console.log('No auth data, redirecting to login');
+        window.location.href = '/login?error=auth_required';
+        return;
+      }
+
+      try {
+        const parsedAuth = JSON.parse(authData);
+        const user = parsedAuth.state?.user;
+        const isAdmin = parsedAuth.state?.isAdmin;
+
+        if (!user || !isAdmin) {
+          console.log('Not admin, redirecting to home');
+          window.location.href = '/?error=access_denied';
+          return;
+        }
+
+        console.log('✅ Admin access granted for newsletter management');
+        
+        // Load newsletter statistics
+        loadNewsletterStats();
+        
+        // Setup form handlers
+        setupFormHandlers();
+        
+      } catch (error) {
+        console.error('Auth parsing error:', error);
+        window.location.href = '/login?error=auth_invalid';
+      }
+    });
+
+    async function loadNewsletterStats() {
+      const subscriberCountEl = document.getElementById('subscriber-count');
+      
+      try {
+        console.log('📊 Loading newsletter stats...');
+        
+        // Show loading state
+        subscriberCountEl.textContent = 'Loading...';
+        
+        // Try to load without auth first (since we removed auth requirement)
+        const response = await fetch('/api/newsletter/count');
+
+        console.log('📊 Newsletter count API response status:', response.status);
+
+        if (response.ok) {
+          const data = await response.json();
+          console.log('📊 Newsletter count data:', data);
+          
+          if (data.success) {
+            const count = data.count || 0;
+            subscriberCountEl.textContent = count.toString();
+            console.log(`✅ Subscriber count loaded: ${count} (source: ${data.source || 'unknown'})`);
+            
+            // Show additional info if using fallback
+            if (data.source === 'fallback') {
+              subscriberCountEl.title = 'Using fallback count - check Brevo configuration';
+              subscriberCountEl.style.color = '#f59e0b'; // Warning color
+            }
+          } else {
+            subscriberCountEl.textContent = '0';
+            subscriberCountEl.title = data.message || 'Failed to load count';
+            console.warn('⚠️ API returned error:', data.error);
+          }
+        } else {
+          console.error('❌ API request failed with status:', response.status);
+          const errorText = await response.text();
+          console.error('❌ Error response:', errorText);
+          
+          subscriberCountEl.textContent = 'Error';
+          subscriberCountEl.title = `API Error: ${response.status}`;
+          subscriberCountEl.style.color = '#ef4444'; // Error color
+        }
+      } catch (error) {
+        console.error('❌ Failed to load newsletter stats:', error);
+        subscriberCountEl.textContent = 'Error';
+        subscriberCountEl.title = `Network error: ${error.message}`;
+        subscriberCountEl.style.color = '#ef4444'; // Error color
+      }
+    }
+
+    function setupFormHandlers() {
+      const form = document.getElementById('broadcast-form');
+      const previewBtn = document.getElementById('preview-btn');
+      const sendBtn = document.getElementById('send-btn');
+      const previewModal = document.getElementById('preview-modal');
+      const closePreview = document.getElementById('close-preview');
+
+      // Preview functionality
+      previewBtn.addEventListener('click', function() {
+        const formData = getFormData();
+        if (!formData.subject || !formData.title || !formData.content) {
+          alert('Please fill in required fields (Subject, Title, and Content)');
+          return;
+        }
+        
+        showPreview(formData);
+      });
+
+      // Close preview modal
+      closePreview.addEventListener('click', function() {
+        previewModal.classList.add('hidden');
+      });
+
+      // Send newsletter
+      form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const formData = getFormData();
+        if (!formData.subject || !formData.title || !formData.content) {
+          showStatus('error', 'Please fill in all required fields');
+          return;
+        }
+
+        if (!confirm('Are you sure you want to send this newsletter to ALL subscribers? This action cannot be undone.')) {
+          return;
+        }
+
+        await sendNewsletter(formData);
+      });
+    }
+
+    function getFormData() {
+      return {
+        subject: document.getElementById('subject').value,
+        title: document.getElementById('title').value,
+        category: document.getElementById('category').value,
+        previewText: document.getElementById('previewText').value,
+        articleUrl: document.getElementById('articleUrl').value,
+        content: document.getElementById('content').value
+      };
+    }
+
+    function showPreview(formData) {
+      const previewContent = document.getElementById('preview-content');
+      
+      // Simple preview (you can enhance this with actual HTML rendering)
+      previewContent.innerHTML = `
+        <div style="font-family: Arial, sans-serif; line-height: 1.6;">
+          <div style="background: linear-gradient(135deg, #16a085, #2c3e50); color: white; padding: 20px; border-radius: 10px; text-align: center; margin-bottom: 20px;">
+            <h1 style="margin: 0; font-size: 24px;">🕌 Islamic Roadmap Newsletter</h1>
+            ${formData.category ? `<p style="margin: 10px 0 0 0; font-size: 14px;">📚 ${formData.category}</p>` : ''}
+          </div>
+          
+          <div style="padding: 0 20px;">
+            <h2 style="color: #2c3e50; font-size: 28px;">${formData.title}</h2>
+            
+            ${formData.previewText ? `
+              <div style="background-color: #e8f5e8; padding: 15px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #16a085;">
+                <p style="margin: 0; font-style: italic;">${formData.previewText}</p>
+              </div>
+            ` : ''}
+            
+            <div style="margin-bottom: 30px;">
+              ${formData.content.replace(/\n/g, '<br>')}
+            </div>
+            
+            ${formData.articleUrl ? `
+              <div style="text-align: center; margin: 30px 0;">
+                <a href="${formData.articleUrl}" style="display: inline-block; background: linear-gradient(135deg, #16a085, #2c3e50); color: white; text-decoration: none; padding: 15px 30px; border-radius: 25px; font-weight: bold;">
+                  📖 Baca Selengkapnya
+                </a>
+              </div>
+            ` : ''}
+          </div>
+        </div>
+      `;
+      
+      document.getElementById('preview-modal').classList.remove('hidden');
+    }
+
+    async function sendNewsletter(formData) {
+      const sendBtn = document.getElementById('send-btn');
+      const originalText = sendBtn.textContent;
+      
+      try {
+        sendBtn.disabled = true;
+        sendBtn.textContent = '📤 Sending...';
+        showStatus('info', 'Sending newsletter to all subscribers...');
+
+        const authData = localStorage.getItem('auth-storage');
+        const parsedAuth = JSON.parse(authData);
+        const token = parsedAuth.state?.session?.access_token;
+
+        const response = await fetch('/api/newsletter/broadcast', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify(formData)
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+          showStatus('success', `✅ ${result.message}`);
+          document.getElementById('broadcast-form').reset();
+          const sentCountEl = document.getElementById('newsletters-sent');
+          sentCountEl.textContent = (parseInt(sentCountEl.textContent || '0') + 1).toString();
+        } else {
+          showStatus('error', `❌ Error: ${result.error || result.message}`);
+        }
+
+      } catch (error) {
+        console.error('Newsletter send error:', error);
+        showStatus('error', '❌ Failed to send newsletter. Please try again.');
+      } finally {
+        sendBtn.disabled = false;
+        sendBtn.textContent = originalText;
+      }
+    }
+
+    function showStatus(type, message) {
+      const statusDiv = document.getElementById('broadcast-status');
+      const messageDiv = document.getElementById('status-message');
+      
+      const colors = {
+        success: 'bg-green-50 border-green-200 text-green-800',
+        error: 'bg-red-50 border-red-200 text-red-800',
+        info: 'bg-blue-50 border-blue-200 text-blue-800'
+      };
+      
+      messageDiv.className = `p-4 rounded-lg border ${colors[type]}`;
+      messageDiv.textContent = message;
+      statusDiv.classList.remove('hidden');
+      
+      // Auto hide after 10 seconds for success/info messages
+      if (type !== 'error') {
+        setTimeout(() => {
+          statusDiv.classList.add('hidden');
+        }, 10000);
+      }
+    }
+  </script>
+</Layout>

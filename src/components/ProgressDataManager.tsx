@@ -1,6 +1,6 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useUserProgressStore, type ExportData } from '../store/userProgressStore';
-import { useAuthStore } from '../store/authStore';
+import { useAuthStore } from '../stores/authStore';
 
 interface ProgressDataManagerProps {
   topicId?: string;

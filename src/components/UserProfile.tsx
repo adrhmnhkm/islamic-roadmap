@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react'
-import { useAuthStore } from '../store/authStore'
+import { useAuthStore } from '../stores/authStore'
 import { supabase } from '../lib/supabase'
 import { ChangePassword } from './ChangePassword'
 import { ExtendedProfileForm } from './ExtendedProfileForm'
@@ -11,7 +11,7 @@ export const UserProfile = () => {
   const [activeTab, setActiveTab] = useState<TabType>('basic')
   const [isEditing, setIsEditing] = useState(false)
   const [formData, setFormData] = useState({
-    username: user?.username || '',
+    full_name: user?.full_name || '',
     email: user?.email || '',
   })
   const [avatarUrl, setAvatarUrl] = useState(user?.avatar_url || '')
@@ -28,7 +28,7 @@ export const UserProfile = () => {
 
   const handleEdit = () => {
     setFormData({
-      username: user.username,
+      full_name: user.full_name || '',
       email: user.email,
     })
     setIsEditing(true)
@@ -50,7 +50,7 @@ export const UserProfile = () => {
       const { error } = await supabase
         .from('users')
         .update({
-          username: formData.username,
+          full_name: formData.full_name,
           updated_at: new Date().toISOString()
         })
         .eq('id', user.id)
@@ -63,7 +63,7 @@ export const UserProfile = () => {
       useAuthStore.setState({
         user: {
           ...user,
-          username: formData.username
+          full_name: formData.full_name
         }
       })
     } catch (err: any) {
@@ -146,7 +146,7 @@ export const UserProfile = () => {
               ) : (
                 <div className="w-full h-full rounded-full bg-white flex items-center justify-center border-4 border-white">
                   <span className="text-2xl text-gray-600">
-                    {user?.username?.[0]?.toUpperCase() || '?'}
+                    {(user?.full_name || user?.email)?.[0]?.toUpperCase() || '?'}
                   </span>
                 </div>
               )}
@@ -157,7 +157,7 @@ export const UserProfile = () => {
               </div>
             </div>
             <div className="text-white">
-              <h1 className="text-2xl font-bold">{user.username}</h1>
+              <h1 className="text-2xl font-bold">{user.full_name || user.email}</h1>
               <p className="text-blue-100">{user.email}</p>
               <p className="text-blue-200 text-sm">
                 Bergabung sejak {new Date(user.created_at).toLocaleDateString('id-ID', { 
@@ -233,12 +233,12 @@ export const UserProfile = () => {
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Username
+                      Full Name
                     </label>
                     <input
                       type="text"
-                      value={formData.username}
-                      onChange={(e) => setFormData({ ...formData, username: e.target.value })}
+                      value={formData.full_name}
+                      onChange={(e) => setFormData({ ...formData, full_name: e.target.value })}
                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       required
                     />
@@ -279,8 +279,8 @@ export const UserProfile = () => {
               ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <h3 className="text-sm font-medium text-gray-500">Username</h3>
-                    <p className="mt-1 text-lg text-gray-900">{user.username}</p>
+                    <h3 className="text-sm font-medium text-gray-500">Full Name</h3>
+                    <p className="mt-1 text-lg text-gray-900">{user.full_name || 'Belum diisi'}</p>
                   </div>
                   <div>
                     <h3 className="text-sm font-medium text-gray-500">Email</h3>

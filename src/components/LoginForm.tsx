@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useAuthStore } from '../store/authStore'
+import { useAuthStore } from '../stores/authStore'
 
 export const LoginForm = () => {
   const [email, setEmail] = useState('')
@@ -53,8 +53,18 @@ export const LoginForm = () => {
 
     try {
       await login(email, password)
-      // Redirect setelah login berhasil
-      window.location.href = '/profile'
+      
+      // Get the updated auth state after login
+      const authState = useAuthStore.getState()
+      
+      // Redirect based on user role
+      if (authState.isAdmin || authState.isSuperAdmin) {
+        console.log('Admin user detected, redirecting to admin dashboard')
+        window.location.href = '/admin'
+      } else {
+        console.log('Regular user, redirecting to profile')
+        window.location.href = '/profile'
+      }
     } catch (err: any) {
       console.error('Login error:', err)
       setError(getErrorMessage(err))

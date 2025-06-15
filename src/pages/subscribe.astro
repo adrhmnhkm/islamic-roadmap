@@ -1,0 +1,238 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Newsletter } from '../components/Newsletter';
+---
+
+<Layout title="Berlangganan Newsletter - Islamic Roadmap">
+  <main class="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
+    <!-- Newsletter Hero Section -->
+    <section class="py-16 px-4">
+      <div class="container mx-auto max-w-6xl">
+        <Newsletter client:load variant="hero" />
+      </div>
+    </section>
+
+    <!-- Content Preview Section -->
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-4 max-w-4xl">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">
+            Apa yang Akan Anda Dapatkan?
+          </h2>
+          <p class="text-gray-600 text-lg">
+            Newsletter mingguan dengan konten berkualitas tinggi untuk mendukung perjalanan pembelajaran Islam Anda
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Weekly Content -->
+          <div class="text-center">
+            <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <span class="text-2xl">📖</span>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">Konten Mingguan</h3>
+            <ul class="text-gray-600 space-y-2 text-sm">
+              <li>• Ayat dan hadits pilihan dengan tafsir</li>
+              <li>• Ringkasan topik pembelajaran minggu ini</li>
+              <li>• Resource baru yang ditambahkan</li>
+              <li>• Q&A dari komunitas</li>
+            </ul>
+          </div>
+
+          <!-- Study Tips -->
+          <div class="text-center">
+            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <span class="text-2xl">🎯</span>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">Tips Belajar</h3>
+            <ul class="text-gray-600 space-y-2 text-sm">
+              <li>• Metode hafalan yang efektif</li>
+              <li>• Cara membangun konsistensi</li>
+              <li>• Teknik tadabbur Al-Quran</li>
+              <li>• Manajemen waktu untuk belajar</li>
+            </ul>
+          </div>
+
+          <!-- Community Updates -->
+          <div class="text-center md:col-span-2 lg:col-span-1">
+            <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <span class="text-2xl">👥</span>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">Update Komunitas</h3>
+            <ul class="text-gray-600 space-y-2 text-sm">
+              <li>• Spotlight member of the week</li>
+              <li>• Diskusi topik trending</li>
+              <li>• Event dan webinar mendatang</li>
+              <li>• Success stories dari learners</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sample Newsletter Content -->
+    <section class="py-16 bg-gray-50">
+      <div class="container mx-auto px-4 max-w-4xl">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">
+            Contoh Konten Newsletter
+          </h2>
+          <p class="text-gray-600">
+            Lihat preview newsletter yang akan Anda terima setiap Jumat pagi
+          </p>
+        </div>
+
+        <!-- Newsletter Preview -->
+        <div class="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
+          <div class="border-b border-gray-200 pb-6 mb-6">
+            <h3 class="text-2xl font-bold text-gray-900 mb-2">
+              🌟 Islamic Roadmap Weekly #47
+            </h3>
+            <p class="text-gray-600 text-sm">Jumat, 15 Desember 2023</p>
+          </div>
+
+          <div class="space-y-6">
+            <!-- Weekly Ayah -->
+            <div class="bg-blue-50 border border-blue-200 rounded-lg p-6">
+              <h4 class="font-semibold text-blue-900 mb-3">📖 Ayat Pilihan Minggu Ini</h4>
+              <blockquote class="text-blue-800 italic mb-3 text-center">
+                "وَمَن يَتَّقِ اللَّهَ يَجْعَل لَّهُ مَخْرَجًا"
+              </blockquote>
+              <p class="text-blue-700 text-sm">
+                "Dan barang siapa yang bertakwa kepada Allah niscaya Dia akan mengadakan baginya jalan keluar." 
+                (QS. At-Talaq: 2)
+              </p>
+              <div class="mt-3 text-blue-600 text-sm">
+                <strong>Refleksi:</strong> Taqwa adalah kunci solusi dalam setiap kesulitan hidup. Minggu ini, mari fokus pada penguatan taqwa melalui konsistensi ibadah dan menjauhi larangan Allah.
+              </div>
+            </div>
+
+            <!-- Learning Focus -->
+            <div>
+              <h4 class="font-semibold text-gray-900 mb-3">🎯 Fokus Pembelajaran Minggu Ini</h4>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="border border-gray-200 rounded-lg p-4">
+                  <h5 class="font-medium text-gray-900 mb-2">📚 Topik: Akhlaq</h5>
+                  <p class="text-gray-600 text-sm mb-3">
+                    Pelajari 5 sifat terpuji yang wajib dimiliki setiap Muslim dalam interaksi sosial.
+                  </p>
+                  <a href="#" class="text-blue-600 text-sm font-medium hover:text-blue-700">
+                    Mulai Belajar →
+                  </a>
+                </div>
+                <div class="border border-gray-200 rounded-lg p-4">
+                  <h5 class="font-medium text-gray-900 mb-2">🎥 Resource Baru</h5>
+                  <p class="text-gray-600 text-sm mb-3">
+                    Video series "Tafsir Surah Al-Mulk" oleh Ustadz Dr. Ahmad Saputra.
+                  </p>
+                  <a href="#" class="text-blue-600 text-sm font-medium hover:text-blue-700">
+                    Tonton Sekarang →
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Study Tip -->
+            <div class="bg-green-50 border border-green-200 rounded-lg p-6">
+              <h4 class="font-semibold text-green-900 mb-3">💡 Tips Belajar: Teknik Muraja'ah</h4>
+              <p class="text-green-800 text-sm mb-3">
+                Untuk memperkuat hafalan, gunakan teknik muraja'ah 3-2-1: Review hafalan 3 hari lalu, 2 minggu lalu, dan 1 bulan lalu setiap sesi belajar.
+              </p>
+              <div class="text-green-700 text-sm">
+                <strong>Action item:</strong> Buat jadwal muraja'ah dan commit untuk 7 hari ke depan.
+              </div>
+            </div>
+
+            <!-- Community Highlight -->
+            <div>
+              <h4 class="font-semibold text-gray-900 mb-3">🌟 Community Highlight</h4>
+              <div class="bg-purple-50 border border-purple-200 rounded-lg p-4">
+                <p class="text-purple-800 text-sm mb-2">
+                  <strong>Sister Fatimah dari Jakarta</strong> berhasil menyelesaikan 30 hadits Nawawi dalam 60 hari menggunakan teknik spaced repetition dari Islamic Roadmap!
+                </p>
+                <p class="text-purple-600 text-xs">
+                  "Alhamdulillah, sistemnya sangat membantu saya tetap konsisten. Sekarang saya bisa menghafal dengan lebih mudah!"
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- CTA in newsletter -->
+          <div class="mt-8 pt-6 border-t border-gray-200 text-center">
+            <p class="text-gray-600 text-sm mb-4">
+              Ingin mencoba fitur progress tracking seperti Sister Fatimah?
+            </p>
+            <a 
+              href="/demo-progress" 
+              class="inline-flex items-center px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors font-medium"
+            >
+              <span class="mr-2">🚀</span>
+              Coba Demo Progress Tracker
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-4 max-w-3xl">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">
+            Frequently Asked Questions
+          </h2>
+        </div>
+
+        <div class="space-y-6">
+          <div class="border border-gray-200 rounded-lg p-6">
+            <h3 class="font-semibold text-gray-900 mb-2">Kapan newsletter dikirim?</h3>
+            <p class="text-gray-600 text-sm">
+              Setiap hari Jumat pagi pukul 08:00 WIB. Kami konsisten mengirim selama 2+ tahun!
+            </p>
+          </div>
+
+          <div class="border border-gray-200 rounded-lg p-6">
+            <h3 class="font-semibold text-gray-900 mb-2">Apakah benar-benar gratis?</h3>
+            <p class="text-gray-600 text-sm">
+              Ya, sepenuhnya gratis selamanya. Kami berkomitmen menyebarkan ilmu agama tanpa biaya.
+            </p>
+          </div>
+
+          <div class="border border-gray-200 rounded-lg p-6">
+            <h3 class="font-semibold text-gray-900 mb-2">Bagaimana jika ingin berhenti berlangganan?</h3>
+            <p class="text-gray-600 text-sm">
+              Setiap email newsletter ada link unsubscribe di bagian bawah. Klik sekali langsung berhenti, tanpa pertanyaan.
+            </p>
+          </div>
+
+          <div class="border border-gray-200 rounded-lg p-6">
+            <h3 class="font-semibold text-gray-900 mb-2">Apakah data email saya aman?</h3>
+            <p class="text-gray-600 text-sm">
+              Sangat aman. Kami tidak pernah membagikan data subscriber kepada pihak ketiga. Email hanya digunakan untuk newsletter.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="py-16 bg-gradient-to-r from-blue-600 to-purple-600">
+      <div class="container mx-auto px-4 max-w-2xl text-center">
+        <h2 class="text-3xl font-bold text-white mb-4">
+          Siap Memulai Perjalanan Belajar?
+        </h2>
+        <p class="text-blue-100 mb-8">
+          Bergabunglah dengan 5,000+ Muslim yang sudah merasakan manfaat newsletter mingguan kami
+        </p>
+        
+        <div class="bg-white rounded-lg p-6">
+          <Newsletter client:load variant="inline" />
+        </div>
+
+        <div class="mt-6 text-blue-100 text-sm">
+          <p>✓ 5,000+ subscribers • ✓ 2+ tahun konsisten • ✓ Rating 4.9/5 dari pembaca</p>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout> 

@@ -1,5 +1,6 @@
 ---
 import { Navbar } from '../components/Navbar';
+import { AuthInitializer } from '../components/AuthInitializer';
 
 interface Props {
   title: string;
@@ -69,6 +70,7 @@ const {
     </script>
   </head>
   <body class="min-h-screen bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50">
+    <AuthInitializer client:load />
     <Navbar client:load />
 
     <div class="min-h-[calc(100vh-64px)]">

@@ -1,0 +1,56 @@
+---
+export const prerender = false;
+
+const { user, role, isSuperAdmin } = Astro.locals;
+---
+
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Management - Islamic Roadmap</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50">
+  <div id="app">
+    <!-- Navigation will be injected by React -->
+  </div>
+
+  <div class="min-h-screen bg-gray-50 py-8">
+    <div class="container mx-auto px-4">
+      <div class="mb-8">
+        <h1 class="text-3xl font-bold text-gray-900 mb-2">👥 User Management</h1>
+        <p class="text-gray-600">Kelola user dan role (Super Admin Only)</p>
+      </div>
+
+      <div class="bg-white rounded-lg shadow p-8 text-center">
+        <div class="mb-4">
+          <svg class="w-16 h-16 text-red-400 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"></path>
+          </svg>
+        </div>
+        <h2 class="text-xl font-semibold text-gray-900 mb-2">Super Admin Feature</h2>
+        <p class="text-gray-600 mb-4">Fitur user management sedang dalam pengembangan</p>
+        <div class="bg-red-50 border border-red-200 rounded-lg p-4 mb-4">
+          <p class="text-red-800 text-sm">
+            🔐 <strong>Super Admin Only:</strong> Hanya Super Admin yang dapat mengakses halaman ini
+          </p>
+        </div>
+        <a href="/admin" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+          ← Kembali ke Dashboard
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { Navigation } from '/src/components/Navigation.tsx';
+    import React from 'react';
+    import { createRoot } from 'react-dom/client';
+
+    const root = createRoot(document.getElementById('app'));
+    root.render(React.createElement(Navigation));
+  </script>
+</body>
+</html> 

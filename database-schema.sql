@@ -1,7 +1,74 @@
 -- Islamic Roadmap Database Schema
--- Extended Profile Management
+-- Extended Profile Management - SAFE VERSION
 
--- Create user_profiles table for extended user information
+-- Create custom types (safe - won't error if exists)
+DO $$ BEGIN
+    CREATE TYPE user_role AS ENUM ('user', 'admin', 'super_admin');
+EXCEPTION
+    WHEN duplicate_object THEN null;
+END $$;
+
+-- Users table (extends Supabase auth.users) - ONLY CREATE IF NOT EXISTS
+CREATE TABLE IF NOT EXISTS public.users (
+  id UUID REFERENCES auth.users(id) ON DELETE CASCADE PRIMARY KEY,
+  email VARCHAR(255) UNIQUE NOT NULL,
+  full_name VARCHAR(255),
+  avatar_url TEXT,
+  role user_role DEFAULT 'user',
+  is_active BOOLEAN DEFAULT true,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+-- Add columns to users table if they don't exist (SAFE)
+DO $$ BEGIN
+    ALTER TABLE public.users ADD COLUMN role user_role DEFAULT 'user';
+EXCEPTION
+    WHEN duplicate_column THEN null;
+END $$;
+
+DO $$ BEGIN
+    ALTER TABLE public.users ADD COLUMN is_active BOOLEAN DEFAULT true;
+EXCEPTION
+    WHEN duplicate_column THEN null;
+END $$;
+
+DO $$ BEGIN
+    ALTER TABLE public.users ADD COLUMN full_name VARCHAR(255);
+EXCEPTION
+    WHEN duplicate_column THEN null;
+END $$;
+
+DO $$ BEGIN
+    ALTER TABLE public.users ADD COLUMN avatar_url TEXT;
+EXCEPTION
+    WHEN duplicate_column THEN null;
+END $$;
+
+DO $$ BEGIN
+    ALTER TABLE public.users ADD COLUMN created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW();
+EXCEPTION
+    WHEN duplicate_column THEN null;
+END $$;
+
+DO $$ BEGIN
+    ALTER TABLE public.users ADD COLUMN updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW();
+EXCEPTION
+    WHEN duplicate_column THEN null;
+END $$;
+
+-- Admin permissions table - ONLY CREATE IF NOT EXISTS
+CREATE TABLE IF NOT EXISTS public.admin_permissions (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID REFERENCES public.users(id) ON DELETE CASCADE,
+  permissions JSONB DEFAULT '{}',
+  granted_by UUID REFERENCES public.users(id),
+  granted_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  expires_at TIMESTAMP WITH TIME ZONE,
+  is_active BOOLEAN DEFAULT true
+);
+
+-- Create user_profiles table for extended user information - ONLY IF NOT EXISTS
 CREATE TABLE IF NOT EXISTS user_profiles (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
@@ -32,33 +99,17 @@ CREATE TABLE IF NOT EXISTS user_profiles (
   UNIQUE(user_id)
 );
 
--- Enable Row Level Security
-ALTER TABLE user_profiles ENABLE ROW LEVEL SECURITY;
+-- Enable Row Level Security (safe - won't error if already enabled)
+DO $$ BEGIN
+    ALTER TABLE user_profiles ENABLE ROW LEVEL SECURITY;
+EXCEPTION
+    WHEN OTHERS THEN null;
+END $$;
 
--- Policies for user_profiles
-CREATE POLICY "Users can view own profile" ON user_profiles
-  FOR SELECT USING (auth.uid() = user_id);
-
-CREATE POLICY "Users can insert own profile" ON user_profiles
-  FOR INSERT WITH CHECK (auth.uid() = user_id);
-
-CREATE POLICY "Users can update own profile" ON user_profiles
-  FOR UPDATE USING (auth.uid() = user_id);
-
--- Create avatars storage bucket (if not exists)
+-- Create storage bucket (safe - uses ON CONFLICT)
 INSERT INTO storage.buckets (id, name, public)
 VALUES ('avatars', 'avatars', true)
 ON CONFLICT (id) DO NOTHING;
-
--- Policies for avatars storage
-CREATE POLICY "Avatar images are publicly accessible" ON storage.objects
-  FOR SELECT USING (bucket_id = 'avatars');
-
-CREATE POLICY "Anyone can upload an avatar" ON storage.objects
-  FOR INSERT WITH CHECK (bucket_id = 'avatars');
-
-CREATE POLICY "Anyone can update their own avatar" ON storage.objects
-  FOR UPDATE USING (auth.uid()::text = (storage.foldername(name))[1]);
 
 -- Function to automatically update updated_at timestamp
 CREATE OR REPLACE FUNCTION update_updated_at_column()
@@ -69,23 +120,23 @@ BEGIN
 END;
 $$ language 'plpgsql';
 
--- Trigger to automatically update updated_at on user_profiles
-CREATE TRIGGER update_user_profiles_updated_at
-  BEFORE UPDATE ON user_profiles
-  FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
-
--- Create indexes for better performance
+-- Create indexes (safe - uses IF NOT EXISTS)
 CREATE INDEX IF NOT EXISTS idx_user_profiles_user_id ON user_profiles(user_id);
 CREATE INDEX IF NOT EXISTS idx_user_profiles_learning_level ON user_profiles(learning_level);
 CREATE INDEX IF NOT EXISTS idx_user_profiles_preferred_language ON user_profiles(preferred_language);
 
--- Sample data (optional - for testing)
--- Uncomment the following if you want to add sample data
+-- Create indexes for users table (safe)
+DO $$ BEGIN
+    CREATE INDEX idx_users_role ON public.users(role);
+EXCEPTION
+    WHEN OTHERS THEN null;
+END $$;
 
--- INSERT INTO user_profiles (user_id, first_name, last_name, bio, location, preferred_language, learning_level, favorite_topics)
--- VALUES 
---   ('your-user-id-here', 'Ahmad', 'Rahman', 'Seorang pelajar Islam yang ingin memperdalam ilmu agama', 'Jakarta, Indonesia', 'indonesia', 'beginner', ARRAY['quran', 'hadith']),
---   ('another-user-id', 'Fatimah', 'Zahra', 'Mahasiswi yang tertarik dengan kajian tafsir Al-Quran', 'Bandung, Indonesia', 'indonesia', 'intermediate', ARRAY['quran', 'tafsir', 'arabic']);
+DO $$ BEGIN
+    CREATE INDEX idx_users_email ON public.users(email);
+EXCEPTION
+    WHEN OTHERS THEN null;
+END $$;
 
 -- Views for easier data access
 CREATE OR REPLACE VIEW user_profiles_with_auth AS
@@ -156,7 +207,152 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;
 
+-- Helper functions for role checking (SAFE - handles missing columns)
+CREATE OR REPLACE FUNCTION is_admin()
+RETURNS BOOLEAN AS $$
+BEGIN
+  RETURN EXISTS (
+    SELECT 1 FROM public.users 
+    WHERE id = auth.uid() 
+    AND COALESCE(role, 'user'::user_role) IN ('admin', 'super_admin')
+    AND COALESCE(is_active, true) = true
+  );
+EXCEPTION
+  WHEN OTHERS THEN
+    RETURN false;
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
+
+CREATE OR REPLACE FUNCTION is_super_admin()
+RETURNS BOOLEAN AS $$
+BEGIN
+  RETURN EXISTS (
+    SELECT 1 FROM public.users 
+    WHERE id = auth.uid() 
+    AND COALESCE(role, 'user'::user_role) = 'super_admin'
+    AND COALESCE(is_active, true) = true
+  );
+EXCEPTION
+  WHEN OTHERS THEN
+    RETURN false;
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
+
+CREATE OR REPLACE FUNCTION get_user_role()
+RETURNS user_role AS $$
+DECLARE
+  user_role_result user_role;
+BEGIN
+  SELECT COALESCE(role, 'user'::user_role) INTO user_role_result
+  FROM public.users 
+  WHERE id = auth.uid() 
+  AND COALESCE(is_active, true) = true;
+  
+  RETURN COALESCE(user_role_result, 'user'::user_role);
+EXCEPTION
+  WHEN OTHERS THEN
+    RETURN 'user'::user_role;
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
+
 -- Grant permissions
 GRANT USAGE ON SCHEMA public TO authenticated;
 GRANT ALL ON user_profiles TO authenticated;
-GRANT EXECUTE ON FUNCTION get_user_complete_profile(UUID) TO authenticated; 
+GRANT ALL ON public.users TO authenticated;
+GRANT ALL ON public.admin_permissions TO authenticated;
+GRANT EXECUTE ON FUNCTION get_user_complete_profile(UUID) TO authenticated;
+GRANT EXECUTE ON FUNCTION is_admin() TO authenticated;
+GRANT EXECUTE ON FUNCTION is_super_admin() TO authenticated;
+GRANT EXECUTE ON FUNCTION get_user_role() TO authenticated;
+
+-- Enable Row Level Security (safe)
+DO $$ BEGIN
+    ALTER TABLE public.users ENABLE ROW LEVEL SECURITY;
+EXCEPTION
+    WHEN OTHERS THEN null;
+END $$;
+
+DO $$ BEGIN
+    ALTER TABLE public.admin_permissions ENABLE ROW LEVEL SECURITY;
+EXCEPTION
+    WHEN OTHERS THEN null;
+END $$;
+
+-- Create policies (safe - will replace if exists)
+-- Users table policies
+DROP POLICY IF EXISTS "Users can view their own profile" ON public.users;
+CREATE POLICY "Users can view their own profile" ON public.users
+  FOR SELECT USING (auth.uid() = id);
+
+DROP POLICY IF EXISTS "Users can update their own profile" ON public.users;
+CREATE POLICY "Users can update their own profile" ON public.users
+  FOR UPDATE USING (auth.uid() = id);
+
+DROP POLICY IF EXISTS "Admins can view all users" ON public.users;
+CREATE POLICY "Admins can view all users" ON public.users
+  FOR SELECT USING (is_admin());
+
+DROP POLICY IF EXISTS "Super admins can manage all users" ON public.users;
+CREATE POLICY "Super admins can manage all users" ON public.users
+  FOR ALL USING (is_super_admin());
+
+-- Admin permissions policies
+DROP POLICY IF EXISTS "Admins can view their own permissions" ON public.admin_permissions;
+CREATE POLICY "Admins can view their own permissions" ON public.admin_permissions
+  FOR SELECT USING (auth.uid() = user_id);
+
+DROP POLICY IF EXISTS "Super admins can manage all permissions" ON public.admin_permissions;
+CREATE POLICY "Super admins can manage all permissions" ON public.admin_permissions
+  FOR ALL USING (is_super_admin());
+
+-- User profiles policies
+DROP POLICY IF EXISTS "Users can manage their own profile" ON public.user_profiles;
+CREATE POLICY "Users can manage their own profile" ON public.user_profiles
+  FOR ALL USING (auth.uid() = user_id);
+
+DROP POLICY IF EXISTS "Admins can view all profiles" ON public.user_profiles;
+CREATE POLICY "Admins can view all profiles" ON public.user_profiles
+  FOR SELECT USING (is_admin());
+
+-- Storage policies (safe - will replace if exists)
+DROP POLICY IF EXISTS "Avatar images are publicly accessible" ON storage.objects;
+CREATE POLICY "Avatar images are publicly accessible" ON storage.objects
+  FOR SELECT USING (bucket_id = 'avatars');
+
+DROP POLICY IF EXISTS "Anyone can upload an avatar" ON storage.objects;
+CREATE POLICY "Anyone can upload an avatar" ON storage.objects
+  FOR INSERT WITH CHECK (bucket_id = 'avatars');
+
+DROP POLICY IF EXISTS "Anyone can update their own avatar" ON storage.objects;
+CREATE POLICY "Anyone can update their own avatar" ON storage.objects
+  FOR UPDATE USING (auth.uid()::text = (storage.foldername(name))[1]);
+
+-- Create triggers (safe - will replace if exists)
+DROP TRIGGER IF EXISTS update_user_profiles_updated_at ON user_profiles;
+CREATE TRIGGER update_user_profiles_updated_at
+  BEFORE UPDATE ON user_profiles
+  FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+
+DROP TRIGGER IF EXISTS update_users_updated_at ON public.users;
+CREATE TRIGGER update_users_updated_at
+  BEFORE UPDATE ON public.users
+  FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+
+-- Insert default super admin (safe - uses ON CONFLICT)
+-- GANTI EMAIL INI DENGAN EMAIL ANDA!
+DO $$ 
+BEGIN
+  INSERT INTO public.users (id, email, full_name, role)
+  SELECT 
+    auth.users.id,
+    auth.users.email,
+    COALESCE(auth.users.raw_user_meta_data->>'full_name', auth.users.email),
+    'super_admin'::user_role
+  FROM auth.users 
+  WHERE auth.users.email = 'adrhmnhkm@gmail.com' -- GANTI DENGAN EMAIL ANDA!
+  ON CONFLICT (id) DO UPDATE SET 
+    role = 'super_admin',
+    updated_at = NOW();
+EXCEPTION
+  WHEN OTHERS THEN null;
+END $$; 

@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import TopicCard from '../components/TopicCard.astro';
+import { Newsletter } from '../components/Newsletter';
 import { changelog } from '../data/changelog';
 import { topicData, calculateResourceCount } from '../data/topics';
 
@@ -57,259 +58,212 @@ const guides = [
 const latestChangelog = changelog.slice(0, 5);
 ---
 
-<Layout title="Islamic Roadmap - Panduan Belajar Islam Terarah">
-  <main>
-    <section class="relative py-20 overflow-hidden">
-      <div class="absolute inset-0 bg-gradient-to-br from-emerald-100/50 via-teal-100/30 to-cyan-100/50"></div>
-      <div class="container mx-auto px-4 relative">
-        <div class="max-w-3xl mx-auto text-center">
-          <h1 class="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-emerald-700 to-teal-700 bg-clip-text text-transparent">
-            Islamic Roadmap
-          </h1>
-          <p class="text-xl text-gray-600 mb-12">
-            Ikuti alur pembelajaran yang terstruktur untuk memahami Islam secara komprehensif, dari tingkat dasar hingga lanjutan.
-          </p>
-          <a 
-            href="#topics" 
-            class="inline-flex items-center px-6 py-3 text-lg font-semibold text-white bg-gradient-to-r from-emerald-600 to-teal-600 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5"
-          >
-            Mulai Belajar
-            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-            </svg>
-          </a>
+<Layout title="Islamic Roadmap - Sedang Update Mayor">
+  <main class="min-h-screen bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50">
+    <!-- Maintenance Hero Section -->
+    <section class="py-20 px-4">
+      <div class="container mx-auto max-w-4xl text-center">
+        <!-- Animated Construction Icon -->
+        <div class="mb-8">
+          <div class="inline-block animate-bounce">
+            <span class="text-8xl">🚧</span>
+          </div>
         </div>
-      </div>
-    </section>
 
-    <section id="topics" class="py-20">
-      <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold text-center mb-4 bg-gradient-to-r from-emerald-700 to-teal-700 bg-clip-text text-transparent">
-          Topik Pembelajaran
-        </h2>
-        <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
-          Pilih topik yang ingin Anda pelajari dan mulai perjalanan pembelajaran Anda.
+        <!-- Main Title -->
+        <h1 class="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-emerald-700 to-teal-700 bg-clip-text text-transparent">
+          Sedang Update Mayor
+        </h1>
+        
+        <!-- Subtitle -->
+        <p class="text-xl md:text-2xl text-gray-600 mb-8 max-w-2xl mx-auto">
+          Kami sedang melakukan pembaruan besar-besaran untuk memberikan pengalaman belajar Islam yang lebih baik
         </p>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {topics.map(topic => (
-            <TopicCard {...topic} />
-          ))}
-        </div>
-      </div>
-    </section>
 
-    <!-- New Progress Tracking Feature Section -->
-    <section class="py-20 bg-gradient-to-br from-blue-50 via-purple-50 to-indigo-50">
-      <div class="container mx-auto px-4">
-        <div class="max-w-4xl mx-auto">
-          <div class="text-center mb-12">
-            <div class="flex items-center justify-center gap-3 mb-4">
-              <span class="text-4xl">✅</span>
-              <h2 class="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                Lacak Progress Pembelajaran Anda
-              </h2>
-            </div>
-            <p class="text-gray-600 max-w-2xl mx-auto">
-              Fitur baru! Sekarang Anda dapat melacak progress pembelajaran untuk setiap resource, menambahkan catatan personal, dan memberikan rating.
-            </p>
+        <!-- Status Card -->
+        <div class="bg-white/70 backdrop-blur-sm rounded-2xl p-8 shadow-xl mb-12 max-w-2xl mx-auto">
+          <div class="flex items-center justify-center gap-3 mb-4">
+            <span class="text-3xl">⚡</span>
+            <h2 class="text-2xl font-bold text-gray-800">Update Progress</h2>
           </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-            <div class="bg-white/60 backdrop-blur-sm rounded-xl p-6 shadow-lg">
-              <div class="text-3xl mb-4">📋</div>
-              <h3 class="text-lg font-semibold text-gray-800 mb-2">Resource Checklist</h3>
-              <p class="text-gray-600 text-sm">
-                Tandai resource sebagai selesai, sedang dipelajari, atau belum dimulai dengan sistem checklist yang intuitif.
-              </p>
+          
+          <!-- Progress Bar -->
+          <div class="mb-6">
+            <div class="flex justify-between text-sm text-gray-600 mb-2">
+              <span>Progress Update</span>
+              <span>85%</span>
             </div>
-
-            <div class="bg-white/60 backdrop-blur-sm rounded-xl p-6 shadow-lg">
-              <div class="text-3xl mb-4">📝</div>
-              <h3 class="text-lg font-semibold text-gray-800 mb-2">Catatan Personal</h3>
-              <p class="text-gray-600 text-sm">
-                Tambahkan catatan pribadi untuk setiap resource yang Anda pelajari untuk referensi di masa depan.
-              </p>
-            </div>
-
-            <div class="bg-white/60 backdrop-blur-sm rounded-xl p-6 shadow-lg">
-              <div class="text-3xl mb-4">⭐</div>
-              <h3 class="text-lg font-semibold text-gray-800 mb-2">Rating & Review</h3>
-              <p class="text-gray-600 text-sm">
-                Berikan rating 1-5 bintang untuk resource yang telah selesai dan bantu komunitas dengan review Anda.
-              </p>
-            </div>
-
-            <div class="bg-white/60 backdrop-blur-sm rounded-xl p-6 shadow-lg">
-              <div class="text-3xl mb-4">📊</div>
-              <h3 class="text-lg font-semibold text-gray-800 mb-2">Progress Analytics</h3>
-              <p class="text-gray-600 text-sm">
-                Lihat statistik pembelajaran Anda dengan progress bar per level dan analytics keseluruhan.
-              </p>
-            </div>
-
-            <div class="bg-white/60 backdrop-blur-sm rounded-xl p-6 shadow-lg">
-              <div class="text-3xl mb-4">🎯</div>
-              <h3 class="text-lg font-semibold text-gray-800 mb-2">Level-based Learning</h3>
-              <p class="text-gray-600 text-sm">
-                Filter resource berdasarkan level (Dasar, Menengah, Lanjutan) sesuai kemampuan Anda.
-              </p>
-            </div>
-
-            <div class="bg-white/60 backdrop-blur-sm rounded-xl p-6 shadow-lg">
-              <div class="text-3xl mb-4">💾</div>
-              <h3 class="text-lg font-semibold text-gray-800 mb-2">Data Tersimpan</h3>
-              <p class="text-gray-600 text-sm">
-                Semua progress dan catatan Anda tersimpan secara otomatis dan tidak akan hilang.
-              </p>
+            <div class="w-full bg-gray-200 rounded-full h-3">
+              <div class="bg-gradient-to-r from-emerald-500 to-teal-500 h-3 rounded-full transition-all duration-1000 ease-out" style="width: 85%"></div>
             </div>
           </div>
 
+          <!-- Estimated Time -->
           <div class="text-center">
-            <div class="flex flex-wrap gap-4 justify-center">
-              <a 
-                href="/demo-progress"
-                class="inline-flex items-center px-6 py-3 text-white bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5"
-              >
-                <span class="mr-2">🧪</span>
-                Coba Demo Progress
-              </a>
-              <a 
-                href="/topics/quran/progress"
-                class="inline-flex items-center px-6 py-3 text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
-              >
-                <span class="mr-2">📖</span>
-                Progress Al-Quran
-              </a>
-            </div>
-            <p class="text-sm text-gray-500 mt-4">
-              💡 Tip: Hover pada topic card di atas untuk melihat tombol "Progress"
+            <p class="text-gray-700 mb-2">
+              <span class="font-semibold">Estimasi Selesai:</span>
+            </p>
+            <p class="text-2xl font-bold text-emerald-600">
+              2-3 Hari Lagi
             </p>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="py-20 bg-white/50">
-      <div class="container mx-auto px-4">
-        <div class="max-w-3xl mx-auto">
-          <div class="flex items-center gap-3 mb-8">
-            <span class="text-4xl">🚀</span>
-            <div>
-              <h2 class="text-3xl font-bold bg-gradient-to-r from-emerald-700 to-teal-700 bg-clip-text text-transparent">
-                Aktif Dikembangkan
-              </h2>
-              <p class="text-gray-600 mt-2">
-                Kami terus meningkatkan konten belajar baru, menambah sumber belajar baru, dan mengembangkan fitur untuk pengalaman belajar yang lebih baik.
-              </p>
-            </div>
-          </div>
-
-          <div class="relative">
-            <div class="absolute left-4 top-0 h-full w-0.5 bg-gray-200"></div>
-            <div class="space-y-8">
-              {latestChangelog.map((item) => (
-                <div class="relative pl-10">
-                  <div class={`absolute left-2 top-2 w-4 h-4 rounded-full border-4 bg-white
-                    ${item.category === 'feature' ? 'border-emerald-500' :
-                      item.category === 'improvement' ? 'border-blue-500' :
-                      'border-amber-500'}`}
-                  ></div>
-                  <div class="text-sm text-gray-500 mb-1">{item.date}</div>
-                  <h3 class="text-lg font-semibold text-gray-800">{item.title}</h3>
-                  <p class="text-gray-600 mt-1">{item.description}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div class="mt-8 flex gap-4 justify-center">
-            <a 
-              href="/changelog"
-              class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 transition-colors"
-            >
-              Lihat Semua Perubahan
-            </a>
-            <a 
-              href="/subscribe"
-              class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-emerald-600 rounded-md hover:bg-emerald-700 transition-colors"
-            >
-              <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-              </svg>
-              Berlangganan Notifikasi
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="guides" class="py-20 bg-white/50">
-      <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold text-center mb-4 bg-gradient-to-r from-emerald-700 to-teal-700 bg-clip-text text-transparent">
-          Panduan Terbaru
-        </h2>
-        <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
-          Artikel dan panduan praktis untuk membantu perjalanan belajar Anda.
-        </p>
-        <div class="max-w-3xl mx-auto">
-          <div class="space-y-4">
-            {guides.map(guide => (
-              <a 
-                href={guide.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="block p-4 rounded-lg hover:bg-white transition-colors duration-300 group"
-              >
-                <div class="flex items-center justify-between">
-                  <div class="flex-1">
-                    <h3 class="text-lg font-medium text-gray-800 group-hover:text-emerald-600 transition-colors">
-                      {guide.title}
-                    </h3>
-                    <span class={`inline-block mt-2 px-2 py-1 text-xs font-medium rounded-full ${
-                      guide.language === 'Indonesia' 
-                        ? 'bg-emerald-100 text-emerald-800' 
-                        : 'bg-violet-100 text-violet-800'
-                    }`}>
-                      {guide.language}
-                    </span>
-                  </div>
-                  <svg 
-                    class="w-5 h-5 text-gray-400 group-hover:text-emerald-600 transition-colors flex-shrink-0 ml-4"
-                    fill="none" 
-                    stroke="currentColor" 
-                    viewBox="0 0 24 24"
-                  >
-                    <path 
-                      stroke-linecap="round" 
-                      stroke-linejoin="round" 
-                      stroke-width="2" 
-                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                    />
-                  </svg>
-                </div>
-              </a>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="about" class="py-20 bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50">
-      <div class="container mx-auto px-4">
-        <div class="max-w-3xl mx-auto text-center">
-          <h2 class="text-3xl font-bold mb-6 bg-gradient-to-r from-emerald-700 to-teal-700 bg-clip-text text-transparent">
-            Tentang Islamic Roadmap
+    <!-- What's New Section -->
+    <section class="py-16 px-4">
+      <div class="container mx-auto max-w-4xl">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            🎉 Fitur Baru yang Akan Hadir
           </h2>
-          <div class="bg-white/60 backdrop-blur-sm rounded-2xl p-8 shadow-lg">
-            <p class="text-gray-600 mb-4">
-              Roadmap ini dirancang untuk memberikan panduan yang jelas dalam mempelajari Islam. Setiap topik disusun secara bertahap, mulai dari tingkat dasar hingga lanjutan.
+          <p class="text-gray-600">
+            Update mayor ini akan membawa banyak fitur baru yang akan meningkatkan pengalaman belajar Anda
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Feature 1 -->
+          <div class="bg-white/60 backdrop-blur-sm rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300">
+            <div class="text-4xl mb-4">📧</div>
+            <h3 class="text-lg font-semibold text-gray-800 mb-2">Newsletter System</h3>
+            <p class="text-gray-600 text-sm">
+              Dapatkan update artikel dan konten terbaru langsung ke email Anda dengan sistem newsletter otomatis.
             </p>
-            <p class="text-gray-600">
-              Pilih topik yang ingin Anda pelajari, ikuti alurnya, dan manfaatkan sumber-sumber belajar yang telah kami kurasi dengan cermat.
+          </div>
+
+          <!-- Feature 2 -->
+          <div class="bg-white/60 backdrop-blur-sm rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300">
+            <div class="text-4xl mb-4">🔐</div>
+            <h3 class="text-lg font-semibold text-gray-800 mb-2">Enhanced Security</h3>
+            <p class="text-gray-600 text-sm">
+              Sistem keamanan yang lebih kuat dengan autentikasi berlapis dan perlindungan data yang lebih baik.
+            </p>
+          </div>
+
+          <!-- Feature 3 -->
+          <div class="bg-white/60 backdrop-blur-sm rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300">
+            <div class="text-4xl mb-4">📊</div>
+            <h3 class="text-lg font-semibold text-gray-800 mb-2">Advanced Analytics</h3>
+            <p class="text-gray-600 text-sm">
+              Analisis pembelajaran yang lebih detail dengan insights dan rekomendasi personal.
+            </p>
+          </div>
+
+          <!-- Feature 4 -->
+          <div class="bg-white/60 backdrop-blur-sm rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300">
+            <div class="text-4xl mb-4">🎯</div>
+            <h3 class="text-lg font-semibold text-gray-800 mb-2">Goal Setting</h3>
+            <p class="text-gray-600 text-sm">
+              Tetapkan target pembelajaran dengan sistem goal setting dan tracking yang lebih canggih.
+            </p>
+          </div>
+
+          <!-- Feature 5 -->
+          <div class="bg-white/60 backdrop-blur-sm rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300">
+            <div class="text-4xl mb-4">🌙</div>
+            <h3 class="text-lg font-semibold text-gray-800 mb-2">Islamic Calendar</h3>
+            <p class="text-gray-600 text-sm">
+              Integrasi kalender Hijriah dengan reminder untuk ibadah dan momen-momen penting.
+            </p>
+          </div>
+
+          <!-- Feature 6 -->
+          <div class="bg-white/60 backdrop-blur-sm rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300">
+            <div class="text-4xl mb-4">💬</div>
+            <h3 class="text-lg font-semibold text-gray-800 mb-2">Community Features</h3>
+            <p class="text-gray-600 text-sm">
+              Fitur komunitas untuk diskusi, sharing progress, dan saling mendukung dalam pembelajaran.
             </p>
           </div>
         </div>
       </div>
     </section>
+
+    <!-- Stay Connected Section -->
+    <section class="py-16 px-4 bg-white/30">
+      <div class="container mx-auto max-w-3xl text-center">
+        <h2 class="text-3xl font-bold mb-6 bg-gradient-to-r from-emerald-700 to-teal-700 bg-clip-text text-transparent">
+          Tetap Terhubung
+        </h2>
+        <p class="text-gray-600 mb-8">
+          Jangan sampai ketinggalan update terbaru! Ikuti kami di media sosial atau subscribe newsletter.
+        </p>
+
+        <!-- Newsletter Signup -->
+        <div class="bg-white/70 backdrop-blur-sm rounded-2xl p-8 shadow-xl mb-8">
+          <div class="flex items-center justify-center gap-3 mb-4">
+            <span class="text-3xl">📧</span>
+            <h3 class="text-xl font-bold text-gray-800">Subscribe Newsletter</h3>
+          </div>
+          <p class="text-gray-600 mb-6">
+            Dapatkan notifikasi langsung ketika website sudah kembali online dan fitur-fitur baru tersedia.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+            <input 
+              type="email" 
+              placeholder="Masukkan email Anda"
+              class="flex-1 px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+            >
+            <button class="px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-lg font-semibold hover:shadow-lg transition-all duration-300">
+              Subscribe
+            </button>
+          </div>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-white/60 backdrop-blur-sm rounded-xl p-6 shadow-lg">
+            <div class="text-3xl mb-3">📱</div>
+            <h4 class="font-semibold text-gray-800 mb-2">Follow Social Media</h4>
+            <p class="text-gray-600 text-sm">
+              Ikuti update terbaru di media sosial kami untuk mendapatkan informasi real-time.
+            </p>
+          </div>
+          
+          <div class="bg-white/60 backdrop-blur-sm rounded-xl p-6 shadow-lg">
+            <div class="text-3xl mb-3">💌</div>
+            <h4 class="font-semibold text-gray-800 mb-2">Email Support</h4>
+            <p class="text-gray-600 text-sm">
+              Ada pertanyaan? Hubungi kami di <br>
+              <a href="mailto:support@islamicroadmap.cloud" class="text-emerald-600 hover:underline">
+                support@islamicroadmap.cloud
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 px-4 text-center">
+      <div class="container mx-auto">
+        <p class="text-gray-500 mb-4">
+          Terima kasih atas kesabaran Anda. Kami bekerja keras untuk memberikan yang terbaik! 🤲
+        </p>
+        <div class="flex items-center justify-center gap-2 text-sm text-gray-400">
+          <span>Last updated:</span>
+          <span id="last-updated"></span>
+        </div>
+      </div>
+    </footer>
   </main>
+
+  <script>
+    // Update last updated time
+    document.getElementById('last-updated')!.textContent = new Date().toLocaleString('id-ID');
+    
+    // Simple newsletter subscription (you can connect this to your actual API later)
+    document.querySelector('button')!.addEventListener('click', function() {
+      const emailInput = document.querySelector('input[type="email"]') as HTMLInputElement;
+      const email = emailInput.value;
+      if (email) {
+        alert('Terima kasih! Kami akan mengirimkan update ke ' + email + ' segera setelah website kembali online.');
+        emailInput.value = '';
+      } else {
+        alert('Mohon masukkan email yang valid.');
+      }
+    });
+  </script>
 </Layout>

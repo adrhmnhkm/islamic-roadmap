@@ -1,0 +1,51 @@
+---
+export const prerender = false;
+
+const { user, role } = Astro.locals;
+---
+
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Roadmap Management - Islamic Roadmap</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50">
+  <div id="app">
+    <!-- Navigation will be injected by React -->
+  </div>
+
+  <div class="min-h-screen bg-gray-50 py-8">
+    <div class="container mx-auto px-4">
+      <div class="mb-8">
+        <h1 class="text-3xl font-bold text-gray-900 mb-2">🗺️ Roadmap Management</h1>
+        <p class="text-gray-600">Kelola learning roadmaps untuk platform</p>
+      </div>
+
+      <div class="bg-white rounded-lg shadow p-8 text-center">
+        <div class="mb-4">
+          <svg class="w-16 h-16 text-gray-400 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path>
+          </svg>
+        </div>
+        <h2 class="text-xl font-semibold text-gray-900 mb-2">Coming Soon</h2>
+        <p class="text-gray-600 mb-4">Fitur roadmap management sedang dalam pengembangan</p>
+        <a href="/admin" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+          ← Kembali ke Dashboard
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { Navigation } from '/src/components/Navigation.tsx';
+    import React from 'react';
+    import { createRoot } from 'react-dom/client';
+
+    const root = createRoot(document.getElementById('app'));
+    root.render(React.createElement(Navigation));
+  </script>
+</body>
+</html> 

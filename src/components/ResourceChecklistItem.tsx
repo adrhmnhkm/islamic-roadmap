@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useUserProgressStore } from '../store/userProgressStore';
-import { useAuthStore } from '../store/authStore';
+import { useAuthStore } from '../stores/authStore';
 
 interface ResourceChecklistItemProps {
   topicId: string;

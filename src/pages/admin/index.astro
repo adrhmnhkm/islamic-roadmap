@@ -1,0 +1,230 @@
+---
+import Layout from '../../layouts/Layout.astro';
+export const prerender = false;
+---
+
+<Layout title="Admin Dashboard - Islamic Roadmap">
+  <div class="min-h-screen bg-gray-50">
+    <!-- Header -->
+    <div class="bg-gradient-to-r from-blue-600 to-purple-700 text-white">
+      <div class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold mb-2">⚡ Admin Dashboard</h1>
+        <p class="text-blue-100" id="welcome-message">Selamat datang di panel administrasi Islamic Roadmap</p>
+        <div class="mt-4 bg-blue-800 bg-opacity-50 rounded-lg p-4" id="admin-info" style="display: none;">
+          <div class="flex items-center">
+            <span class="text-2xl mr-3">👤</span>
+            <div>
+              <p class="font-medium" id="admin-email">-</p>
+              <p class="text-sm text-blue-200" id="admin-role">-</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8">
+      <!-- Quick Stats -->
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+        <div class="bg-white rounded-lg shadow p-6">
+          <div class="flex items-center">
+            <div class="p-3 bg-blue-100 rounded-full">
+              <span class="text-2xl">👥</span>
+            </div>
+            <div class="ml-4">
+              <p class="text-sm font-medium text-gray-500">Total Users</p>
+              <p class="text-2xl font-bold text-gray-900">-</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow p-6">
+          <div class="flex items-center">
+            <div class="p-3 bg-green-100 rounded-full">
+              <span class="text-2xl">📧</span>
+            </div>
+            <div class="ml-4">
+              <p class="text-sm font-medium text-gray-500">Newsletter Subscribers</p>
+              <p class="text-2xl font-bold text-gray-900" id="newsletter-count">-</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow p-6">
+          <div class="flex items-center">
+            <div class="p-3 bg-yellow-100 rounded-full">
+              <span class="text-2xl">📚</span>
+            </div>
+            <div class="ml-4">
+              <p class="text-sm font-medium text-gray-500">Active Topics</p>
+              <p class="text-2xl font-bold text-gray-900">7</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow p-6">
+          <div class="flex items-center">
+            <div class="p-3 bg-purple-100 rounded-full">
+              <span class="text-2xl">📊</span>
+            </div>
+            <div class="ml-4">
+              <p class="text-sm font-medium text-gray-500">System Status</p>
+              <p class="text-lg font-bold text-green-600">✅ Online</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="bg-white rounded-lg shadow p-6 mb-8">
+        <h2 class="text-xl font-semibold text-gray-900 mb-6">🚀 Quick Actions</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          <a href="/admin/newsletter" class="p-4 bg-blue-50 hover:bg-blue-100 rounded-lg text-center transition-colors border border-blue-200">
+            <span class="text-3xl block mb-2">📧</span>
+            <h3 class="font-medium text-blue-900">Newsletter</h3>
+            <p class="text-sm text-blue-700">Manage subscribers</p>
+          </a>
+          
+          <a href="/admin/roadmaps" class="p-4 bg-green-50 hover:bg-green-100 rounded-lg text-center transition-colors border border-green-200">
+            <span class="text-3xl block mb-2">🗺️</span>
+            <h3 class="font-medium text-green-900">Roadmaps</h3>
+            <p class="text-sm text-green-700">Manage learning paths</p>
+          </a>
+          
+          <a href="/admin/quizzes" class="p-4 bg-yellow-50 hover:bg-yellow-100 rounded-lg text-center transition-colors border border-yellow-200">
+            <span class="text-3xl block mb-2">❓</span>
+            <h3 class="font-medium text-yellow-900">Quizzes</h3>
+            <p class="text-sm text-yellow-700">Manage assessments</p>
+          </a>
+          
+          <a href="/admin/users" class="p-4 bg-purple-50 hover:bg-purple-100 rounded-lg text-center transition-colors border border-purple-200">
+            <span class="text-3xl block mb-2">👥</span>
+            <h3 class="font-medium text-purple-900">Users</h3>
+            <p class="text-sm text-purple-700">User management</p>
+          </a>
+          
+          <a href="/admin/system" class="p-4 bg-gray-50 hover:bg-gray-100 rounded-lg text-center transition-colors border border-gray-200">
+            <span class="text-3xl block mb-2">⚙️</span>
+            <h3 class="font-medium text-gray-900">System</h3>
+            <p class="text-sm text-gray-700">System settings</p>
+          </a>
+          
+          <a href="/analytics" class="p-4 bg-indigo-50 hover:bg-indigo-100 rounded-lg text-center transition-colors border border-indigo-200">
+            <span class="text-3xl block mb-2">📊</span>
+            <h3 class="font-medium text-indigo-900">Analytics</h3>
+            <p class="text-sm text-indigo-700">View insights</p>
+          </a>
+          
+          <a href="/" class="p-4 bg-emerald-50 hover:bg-emerald-100 rounded-lg text-center transition-colors border border-emerald-200">
+            <span class="text-3xl block mb-2">🏠</span>
+            <h3 class="font-medium text-emerald-900">Main Site</h3>
+            <p class="text-sm text-emerald-700">View as user</p>
+          </a>
+        </div>
+      </div>
+
+      <!-- Recent Activity -->
+      <div class="bg-white rounded-lg shadow p-6">
+        <h2 class="text-xl font-semibold text-gray-900 mb-6">📈 Recent Activity</h2>
+        <div class="space-y-4">
+          <div class="flex items-center p-3 bg-gray-50 rounded-lg">
+            <span class="text-2xl mr-3">👤</span>
+            <div>
+              <p class="font-medium text-gray-900">New user registration</p>
+              <p class="text-sm text-gray-500">2 minutes ago</p>
+            </div>
+          </div>
+          
+          <div class="flex items-center p-3 bg-gray-50 rounded-lg">
+            <span class="text-2xl mr-3">📧</span>
+            <div>
+              <p class="font-medium text-gray-900">Newsletter subscription</p>
+              <p class="text-sm text-gray-500">15 minutes ago</p>
+            </div>
+          </div>
+          
+          <div class="flex items-center p-3 bg-gray-50 rounded-lg">
+            <span class="text-2xl mr-3">✅</span>
+            <div>
+              <p class="font-medium text-gray-900">User completed Quran topic</p>
+              <p class="text-sm text-gray-500">1 hour ago</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Check authentication and admin status
+    document.addEventListener('DOMContentLoaded', function() {
+      const authData = localStorage.getItem('auth-storage');
+      
+      if (!authData) {
+        console.log('No auth data, redirecting to login');
+        window.location.href = '/login?error=auth_required';
+        return;
+      }
+
+      try {
+        const parsedAuth = JSON.parse(authData);
+        const user = parsedAuth.state?.user;
+        const isAdmin = parsedAuth.state?.isAdmin;
+        const isSuperAdmin = parsedAuth.state?.isSuperAdmin;
+
+        if (!user) {
+          console.log('No user data, redirecting to login');
+          window.location.href = '/login?error=auth_required';
+          return;
+        }
+
+        if (!isAdmin && !isSuperAdmin) {
+          console.log('User is not admin, redirecting to home');
+          window.location.href = '/?error=access_denied';
+          return;
+        }
+
+        console.log('✅ Admin access granted:', { 
+          email: user.email, 
+          isAdmin, 
+          isSuperAdmin 
+        });
+
+        // Show personalized welcome message
+        const welcomeMessage = document.getElementById('welcome-message');
+        const adminInfo = document.getElementById('admin-info');
+        const adminEmail = document.getElementById('admin-email');
+        const adminRole = document.getElementById('admin-role');
+
+        if (welcomeMessage && adminInfo && adminEmail && adminRole) {
+          const firstName = user.full_name?.split(' ')[0] || user.email?.split('@')[0] || 'Admin';
+          welcomeMessage.textContent = `Selamat datang kembali, ${firstName}! 👋`;
+          
+          adminEmail.textContent = user.email;
+          adminRole.textContent = isSuperAdmin ? '🔥 Super Administrator' : '⚡ Administrator';
+          
+          adminInfo.style.display = 'block';
+        }
+
+        // Load newsletter count
+        loadNewsletterCount();
+        
+      } catch (error) {
+        console.error('Error parsing auth data:', error);
+        window.location.href = '/login?error=auth_error';
+      }
+    });
+
+    async function loadNewsletterCount() {
+      try {
+        const response = await fetch('/api/newsletter/count');
+        if (response.ok) {
+          const data = await response.json();
+          document.getElementById('newsletter-count').textContent = data.count || '0';
+        }
+      } catch (error) {
+        console.error('Error loading newsletter count:', error);
+      }
+    }
+  </script>
+</Layout> 

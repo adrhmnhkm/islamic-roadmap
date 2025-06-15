@@ -1,7 +1,7 @@
-import { useAuthStore } from '../store/authStore'
+import { useAuthStore } from '../stores/authStore'
 
 export const Navbar = () => {
-  const { user, isAuthenticated, logout } = useAuthStore()
+  const { user, isAuthenticated, signOut, isAdmin, isSuperAdmin } = useAuthStore()
 
   return (
     <nav className="bg-white shadow-lg">
@@ -16,6 +16,13 @@ export const Navbar = () => {
           <div className="flex items-center space-x-4">
             {isAuthenticated ? (
               <>
+                {(isAdmin || isSuperAdmin) && (
+                  <a href="/admin" className="bg-blue-600 text-white px-3 py-2 rounded-md hover:bg-blue-700 transition-colors flex items-center">
+                    <span className="mr-1">⚡</span>
+                    Admin Dashboard
+                  </a>
+                )}
+                
                 <a href="/demo-progress" className="text-gray-700 hover:text-gray-900 flex items-center">
                   <span className="mr-1">✅</span>
                   Demo Progress
@@ -29,7 +36,7 @@ export const Navbar = () => {
                   Profile
                 </a>
                 <button
-                  onClick={logout}
+                  onClick={signOut}
                   className="text-gray-700 hover:text-gray-900"
                 >
                   Logout
